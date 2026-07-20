@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI チーム</title>
+<meta name="description" content="Monica の AI チーム 17人。担当を探して、召喚フレーズをコピーする。">
+<meta name="theme-color" content="#101219">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css?v=3">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AIチーム">
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-top">
+    <h1>AI チーム</h1>
+    <button id="triage-open" class="ask" type="button">誰に頼む？</button>
+  </div>
+
+  <label class="search">
+    <span class="sr-only">名前や役割で検索</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="名前・役割・やりたいこと" autocomplete="off" enterkeyhint="search">
+    <button id="q-clear" class="clear" type="button" hidden aria-label="検索をクリア">✕</button>
+  </label>
+
+  <nav id="chips" class="chips" aria-label="グループで絞り込む"></nav>
+</header>
+
+<main>
+  <p id="count" class="count" aria-live="polite"></p>
+  <div id="roster" class="roster"></div>
+  <p id="empty" class="empty" hidden>該当する人がいません。</p>
+</main>
+
+<footer class="foot">
+  <span id="meta"></span>
+</footer>
+
+<!-- 詳細 -->
+<div id="sheet" class="sheet" hidden>
+  <div class="sheet-back" data-close></div>
+  <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="sheet-name">
+    <button class="sheet-x" type="button" data-close aria-label="閉じる">✕</button>
+    <div class="sheet-head">
+      <h2 id="sheet-name"></h2>
+      <p id="sheet-title"></p>
+    </div>
+    <p id="sheet-summary"></p>
+    <div class="block">
+      <h3>こんな時</h3>
+      <ul id="sheet-use"></ul>
+    </div>
+    <div class="block">
+      <h3>トリガー</h3>
+      <div id="sheet-tags" class="tags"></div>
+    </div>
+    <button id="copy" class="copy" type="button"></button>
+    <p id="copied" class="copied" role="status"></p>
+  </div>
+</div>
+
+<!-- 誰に頼む -->
+<div id="triage" class="sheet" hidden>
+  <div class="sheet-back" data-close></div>
+  <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="triage-q">
+    <button class="sheet-x" type="button" data-close aria-label="閉じる">✕</button>
+    <p class="step" id="triage-step"></p>
+    <h2 id="triage-q"></h2>
+    <div id="triage-options" class="options"></div>
+    <div id="triage-result" class="result" hidden></div>
+    <button id="triage-restart" class="restart" type="button" hidden>最初から</button>
+  </div>
+</div>
+
+<script src="app.js?v=2"></script>
+</body>
+</html>
