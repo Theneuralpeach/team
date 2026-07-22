@@ -45,3 +45,15 @@ sw.js           オフライン用（ネット優先・落ちたらキャッシ�
 manifest.json   ホーム画面インストール用
 tools/          正本との照合スクリプト
 ```
+
+## スキルタブ（2ページ目）
+
+上の「スキル」タブで、Monica のスキル58個（user 28＋Obsidian 30）をカテゴリで絞り込み・検索できる。
+カードをタップすると「何をするスキルか・起動の一言」が出て、起動フレーズ（/business-finder 等）をコピーできる。
+自動で発火するだけのスキル（デザインの床など）はコピーボタンを出さない。
+
+- `Code` バッジ = ~/.claude/skills/ にあり Claude Code で常に使える
+- `Obsidian` バッジ = Obsidian作業（claude-obsidian）で使える
+
+データは `skills.json`。SKILL.md の description から起こしているが、Monica 向けに短く書き直してあるので手動更新。
+実体との照合は `tools/check-skills.sh`（人数ならぬスキル数のズレを検出）。

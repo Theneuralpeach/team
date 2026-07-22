@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI チーム</title>
-<meta name="description" content="Monica の AI チーム 17人。担当を探して、召喚フレーズをコピーする。">
+<meta name="description" content="Monica の AI チーム17人とスキル58個。担当を探して、召喚フレーズをコピーする。">
 <meta name="theme-color" content="#101219">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="styles.css?v=3">
+<link rel="stylesheet" href="styles.css?v=5">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,24 +18,27 @@
 
 <header class="bar">
   <div class="bar-top">
-    <h1>AI チーム</h1>
+    <div class="tabs" role="tablist" aria-label="表示切替">
+      <button id="tab-people" class="tab" role="tab" type="button" aria-selected="true">人</button>
+      <button id="tab-skills" class="tab" role="tab" type="button" aria-selected="false">スキル</button>
+    </div>
     <button id="triage-open" class="ask" type="button">誰に頼む？</button>
   </div>
 
   <label class="search">
-    <span class="sr-only">名前や役割で検索</span>
+    <span class="sr-only">検索</span>
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
     <input id="q" type="search" placeholder="名前・役割・やりたいこと" autocomplete="off" enterkeyhint="search">
     <button id="q-clear" class="clear" type="button" hidden aria-label="検索をクリア">✕</button>
   </label>
 
-  <nav id="chips" class="chips" aria-label="グループで絞り込む"></nav>
+  <nav id="chips" class="chips" aria-label="絞り込み"></nav>
 </header>
 
 <main>
   <p id="count" class="count" aria-live="polite"></p>
   <div id="roster" class="roster"></div>
-  <p id="empty" class="empty" hidden>該当する人がいません。</p>
+  <p id="empty" class="empty" hidden>該当なし。</p>
 </main>
 
 <footer class="foot">
@@ -52,12 +55,12 @@
       <p id="sheet-title"></p>
     </div>
     <p id="sheet-summary"></p>
-    <div class="block">
-      <h3>こんな時</h3>
+    <div class="block" id="block-use">
+      <h3 id="use-label">こんな時</h3>
       <ul id="sheet-use"></ul>
     </div>
-    <div class="block">
-      <h3>トリガー</h3>
+    <div class="block" id="block-tags">
+      <h3 id="tags-label">トリガー</h3>
       <div id="sheet-tags" class="tags"></div>
     </div>
     <button id="copy" class="copy" type="button"></button>
@@ -78,6 +81,6 @@
   </div>
 </div>
 
-<script src="app.js?v=2"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>

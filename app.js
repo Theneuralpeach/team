@@ -1,27 +1,31 @@
-/* AI チーム — 一覧・検索・絞り込み・召喚フレーズのコピー・振り分け */
+/* AI チーム — 人（17人）とスキル（58個）の2ビュー。検索・絞り込み・コピー・振り分け。 */
 (function () {
   "use strict";
 
-  var DATA = null;
-  var filter = "all";
+  var TEAM = null;     // team.json
+  var SKILLS = null;   // skills.json
+  var view = "people"; // "people" | "skills"
+  var filter = { people: "all", skills: "all" };
   var query = "";
 
   var $ = function (id) { return document.getElementById(id); };
 
   /* ---------- 起動 ---------- */
-  fetch("team.json?v=1")
-    .then(function (r) { return r.json(); })
-    .then(function (d) { DATA = d; boot(); })
-    .catch(function () {
-      $("roster").innerHTML =
-        '<p class="empty">データを読み込めませんでした。通信を確認して開き直してください。</p>';
-    });
+  Promise.all([
+    fetch("team.json?v=1").then(function (r) { return r.json(); }),
+    fetch("skills.json?v=1").then(function (r) { return r.json(); })
+  ]).then(function (res) {
+    TEAM = res[0]; SKILLS = res[1]; boot();
+  }).catch(function () {
+    $("roster").innerHTML =
+      '<p class="empty">データを読み込めませんでした。通信を確認して開き直してください。</p>';
+  });
 
   function boot() {
-    buildChips();
-    render();
-    $("meta").textContent =
-      DATA.people.length + "人 · 更新 " + DATA.updated + " · v" + DATA.version;
+    setView("people");
+
+    $("tab-people").addEventListener("click", function () { setView("people"); });
+    $("tab-skills").addEventListener("click", function () { setView("skills"); });
 
     $("q").addEventListener("input", function (e) {
       query = e.target.value.trim().toLowerCase();
@@ -34,7 +38,6 @@
 
     $("triage-open").addEventListener("click", openTriage);
 
-    /* シートを閉じる */
     document.addEventListener("click", function (e) {
       if (e.target.hasAttribute && e.target.hasAttribute("data-close")) closeSheets();
     });
@@ -47,111 +50,207 @@
     }
   }
 
+  /* ---------- ビュー切替 ---------- */
+  function setView(v) {
+    view = v;
+    $("tab-people").setAttribute("aria-selected", v === "people" ? "true" : "false");
+    $("tab-skills").setAttribute("aria-selected", v === "skills" ? "true" : "false");
+    $("triage-open").hidden = v !== "people";
+    $("q").placeholder = v === "people"
+      ? "名前・役割・やりたいこと"
+      : "スキル名・やりたいこと";
+    buildChips();
+    render();
+    window.scrollTo({ top: 0 });
+  }
+
   /* ---------- チップ ---------- */
   function buildChips() {
     var wrap = $("chips");
-    var defs = [{ id: "all", label: "全員" }].concat(DATA.groups);
+    wrap.innerHTML = "";
+    var cur = filter[view];
+
+    var defs, countOf;
+    if (view === "people") {
+      defs = [{ id: "all", label: "全員" }].concat(TEAM.groups);
+      countOf = function (id) {
+        return id === "all" ? TEAM.people.length
+          : TEAM.people.filter(function (p) { return p.group === id; }).length;
+      };
+    } else {
+      defs = [{ id: "all", label: "全部" }].concat(SKILLS.cats);
+      countOf = function (id) {
+        return id === "all" ? SKILLS.skills.length
+          : SKILLS.skills.filter(function (s) { return s.cat === id; }).length;
+      };
+    }
 
     defs.forEach(function (g) {
-      var n = g.id === "all"
-        ? DATA.people.length
-        : DATA.people.filter(function (p) { return p.group === g.id; }).length;
-
       var b = document.createElement("button");
       b.type = "button";
       b.className = "chip";
-      b.dataset.group = g.id;
-      b.setAttribute("aria-pressed", g.id === filter ? "true" : "false");
+      b.dataset.id = g.id;
+      b.setAttribute("aria-pressed", g.id === cur ? "true" : "false");
       b.innerHTML = '<b></b><span class="n"></span>';
       b.querySelector("b").textContent = g.label;
-      b.querySelector(".n").textContent = n;
-
+      b.querySelector(".n").textContent = countOf(g.id);
       b.addEventListener("click", function () {
-        filter = g.id;
+        filter[view] = g.id;
         Array.prototype.forEach.call(wrap.children, function (c) {
-          c.setAttribute("aria-pressed", c.dataset.group === filter ? "true" : "false");
+          c.setAttribute("aria-pressed", c.dataset.id === g.id ? "true" : "false");
         });
         render();
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
-
       wrap.appendChild(b);
     });
   }
 
   /* ---------- 一覧 ---------- */
-  function matches(p) {
-    if (filter !== "all" && p.group !== filter) return false;
-    if (!query) return true;
-    var hay = [p.name, p.ja, p.title, p.summary, p.tags.join(" "), p.use.join(" ")]
-      .join(" ").toLowerCase();
-    return hay.indexOf(query) !== -1;
+  function render() {
+    return view === "people" ? renderPeople() : renderSkills();
   }
 
-  function render() {
-    var list = DATA.people.filter(matches);
+  function renderPeople() {
+    var f = filter.people;
+    var list = TEAM.people.filter(function (p) {
+      if (f !== "all" && p.group !== f) return false;
+      if (!query) return true;
+      var hay = [p.name, p.ja, p.title, p.summary, p.tags.join(" "), p.use.join(" ")]
+        .join(" ").toLowerCase();
+      return hay.indexOf(query) !== -1;
+    });
+
     var roster = $("roster");
     roster.innerHTML = "";
-
     list.forEach(function (p) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "person" + (p.status === "contract" ? " contract" : "");
-
-      var row = document.createElement("div");
-      row.className = "row";
+      var b = card(p.status === "contract");
+      var row = el("div", "row");
       row.appendChild(el("span", "nm", p.name));
       if (p.ja) row.appendChild(el("span", "ja", p.ja));
       if (p.status === "contract") row.appendChild(el("span", "badge", "外注"));
       b.appendChild(row);
-
       b.appendChild(el("div", "ttl", p.title));
       b.appendChild(el("p", "sm", p.summary));
-
       b.addEventListener("click", function () { openPerson(p); });
       roster.appendChild(b);
     });
 
     $("empty").hidden = list.length !== 0;
-    $("count").textContent = list.length + " / " + DATA.people.length + " 人";
+    $("count").textContent = list.length + " / " + TEAM.people.length + " 人";
+    $("meta").textContent =
+      TEAM.people.length + "人 · 更新 " + TEAM.updated;
   }
 
+  function renderSkills() {
+    var f = filter.skills;
+    var list = SKILLS.skills.filter(function (s) {
+      if (f !== "all" && s.cat !== f) return false;
+      if (!query) return true;
+      var hay = [s.name, s.slug, s.what, s.trigger, s.loc].join(" ").toLowerCase();
+      return hay.indexOf(query) !== -1;
+    });
+
+    var roster = $("roster");
+    roster.innerHTML = "";
+    list.forEach(function (s) {
+      var b = card(false);
+      var row = el("div", "row");
+      row.appendChild(el("span", "nm", s.name));
+      row.appendChild(el("span", "loc " + s.loc, s.loc === "user" ? "Code" : "Obsidian"));
+      b.appendChild(row);
+      b.appendChild(el("code", "slug", s.slug));
+      b.appendChild(el("p", "sm", s.what));
+      b.addEventListener("click", function () { openSkill(s); });
+      roster.appendChild(b);
+    });
+
+    $("empty").hidden = list.length !== 0;
+    $("count").textContent = list.length + " / " + SKILLS.skills.length + " 個";
+    $("meta").textContent =
+      SKILLS.skills.length + "個 · 更新 " + SKILLS.updated;
+  }
+
+  function card(isContract) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "person" + (isContract ? " contract" : "");
+    return b;
+  }
   function el(tag, cls, text) {
     var n = document.createElement(tag);
-    n.className = cls;
-    n.textContent = text;
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
     return n;
   }
 
-  /* ---------- 詳細 ---------- */
+  /* ---------- 詳細（人） ---------- */
   function openPerson(p) {
     $("sheet-name").textContent = p.name + (p.ja ? "（" + p.ja + "）" : "");
     $("sheet-title").textContent = p.title + (p.status === "contract" ? " · 外注" : "");
     $("sheet-summary").textContent = p.summary;
 
-    var ul = $("sheet-use");
-    ul.innerHTML = "";
-    p.use.forEach(function (u) {
-      var li = document.createElement("li");
-      li.textContent = u;
-      ul.appendChild(li);
-    });
+    $("use-label").textContent = "こんな時";
+    fillList($("sheet-use"), p.use);
 
-    var tg = $("sheet-tags");
-    tg.innerHTML = "";
-    p.tags.forEach(function (t) {
-      var s = document.createElement("span");
-      s.textContent = t;
-      tg.appendChild(s);
-    });
+    $("tags-label").textContent = "トリガー";
+    fillTags($("sheet-tags"), p.tags);
+    $("block-tags").hidden = false;
 
-    var phrase = p.name + "を召喚して";
-    var btn = $("copy");
-    btn.textContent = "「" + phrase + "」をコピー";
-    $("copied").textContent = "";
-    btn.onclick = function () { copy(phrase); };
-
+    setCopy(p.name + "を召喚して");
     show($("sheet"));
+  }
+
+  /* ---------- 詳細（スキル） ---------- */
+  function openSkill(s) {
+    $("sheet-name").textContent = s.name;
+    $("sheet-title").textContent =
+      s.slug + " · " + (s.loc === "user" ? "Claude Code" : "Obsidian作業");
+    $("sheet-summary").textContent = s.what;
+
+    $("use-label").textContent = "起動の一言";
+    fillList($("sheet-use"), s.trigger.split(" / "));
+
+    $("block-tags").hidden = true;
+
+    var copyText = firstTrigger(s.trigger);
+    if (copyText) {
+      setCopy(copyText, "「" + copyText + "」をコピー");
+      $("copy").hidden = false;
+    } else {
+      // 自動発火のみ = コピーする言葉がない。ボタンを出さない。
+      $("copy").hidden = true;
+      $("copied").textContent = "";
+    }
+    show($("sheet"));
+  }
+
+  /* 貼って意味のあるトリガーを返す。自動発火しかなければ null。 */
+  function firstTrigger(trigger) {
+    var parts = trigger.split(" / ");
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].trim().indexOf("自動で発火") !== 0) return parts[i].trim();
+    }
+    return null;
+  }
+
+  function fillList(ul, items) {
+    ul.innerHTML = "";
+    items.forEach(function (t) {
+      ul.appendChild(el("li", null, t.trim()));
+    });
+  }
+  function fillTags(box, tags) {
+    box.innerHTML = "";
+    tags.forEach(function (t) { box.appendChild(el("span", null, t)); });
+  }
+
+  function setCopy(text, label) {
+    var btn = $("copy");
+    btn.hidden = false;
+    btn.textContent = label || ("「" + text + "」をコピー");
+    $("copied").textContent = "";
+    btn.onclick = function () { copy(text); };
   }
 
   function copy(text) {
@@ -163,17 +262,13 @@
     } else {
       fallback();
     }
-
     function fallback() {
       try {
         var ta = document.createElement("textarea");
-        ta.value = text;
-        ta.setAttribute("readonly", "");
-        ta.style.position = "fixed";
-        ta.style.opacity = "0";
+        ta.value = text; ta.setAttribute("readonly", "");
+        ta.style.position = "fixed"; ta.style.opacity = "0";
         document.body.appendChild(ta);
-        ta.select();
-        ta.setSelectionRange(0, text.length);
+        ta.select(); ta.setSelectionRange(0, text.length);
         var ok = document.execCommand("copy");
         document.body.removeChild(ta);
         ok ? done() : fail();
@@ -181,22 +276,17 @@
     }
   }
 
-  /* ---------- 誰に頼む ---------- */
-  var stepIndex = 0;
-
+  /* ---------- 誰に頼む（人のみ） ---------- */
   function openTriage() {
-    stepIndex = 0;
-    renderStep(DATA.triage[0], 1);
+    renderStep(TEAM.triage[0], 1);
     show($("triage"));
   }
-
   function stepById(id) {
-    for (var i = 0; i < DATA.triage.length; i++) {
-      if (DATA.triage[i].id === id) return DATA.triage[i];
+    for (var i = 0; i < TEAM.triage.length; i++) {
+      if (TEAM.triage[i].id === id) return TEAM.triage[i];
     }
     return null;
   }
-
   function renderStep(step, n) {
     $("triage-step").textContent = "質問 " + n;
     $("triage-q").textContent = step.q;
@@ -207,11 +297,9 @@
     var box = $("triage-options");
     box.hidden = false;
     box.innerHTML = "";
-
     step.options.forEach(function (o) {
-      var b = document.createElement("button");
+      var b = el("button", null, o.label);
       b.type = "button";
-      b.textContent = o.label;
       b.addEventListener("click", function () {
         if (o.next) {
           var nx = stepById(o.next);
@@ -222,7 +310,6 @@
       box.appendChild(b);
     });
   }
-
   function showResult(ids) {
     $("triage-step").textContent = "結果";
     $("triage-q").textContent = ids.length > 1 ? "この2人で組みます" : "この人です";
@@ -231,25 +318,18 @@
     var box = $("triage-result");
     box.hidden = false;
     box.innerHTML = "";
-
     ids.forEach(function (id) {
-      var p = DATA.people.filter(function (x) { return x.id === id; })[0];
+      var p = TEAM.people.filter(function (x) { return x.id === id; })[0];
       if (!p) return;
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "person" + (p.status === "contract" ? " contract" : "");
-      var row = document.createElement("div");
-      row.className = "row";
+      var b = card(p.status === "contract");
+      var row = el("div", "row");
       row.appendChild(el("span", "nm", p.name));
       if (p.ja) row.appendChild(el("span", "ja", p.ja));
       row.appendChild(el("span", "go", "›"));
       b.appendChild(row);
       b.appendChild(el("div", "ttl", p.title));
       b.appendChild(el("p", "sm", p.summary));
-      b.addEventListener("click", function () {
-        closeSheets();
-        openPerson(p);
-      });
+      b.addEventListener("click", function () { closeSheets(); openPerson(p); });
       box.appendChild(b);
     });
 

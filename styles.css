@@ -63,11 +63,26 @@ body {
 
 .bar-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
-.bar h1 {
-  font-family: var(--serif); font-weight: 400;
-  font-size: 21px; letter-spacing: .02em; margin: 0;
+/* ---------- tabs ---------- */
+.tabs {
+  display: inline-flex; gap: 2px;
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 999px; padding: 3px;
+}
+.tab {
+  font-family: var(--serif); font-size: 16px;
+  padding: 6px 18px; border-radius: 999px;
+  border: 0; background: transparent; color: var(--soft);
+  cursor: pointer;
+}
+.tab[aria-selected="true"] {
+  background: var(--ai); color: #fff;
+}
+@media (prefers-color-scheme: dark) {
+  .tab[aria-selected="true"] { color: #101219; }
 }
 
+.ask[hidden] { display: none; }
 .ask {
   font-family: var(--sans); font-size: 13px;
   padding: 7px 14px; border-radius: 999px;
@@ -169,6 +184,22 @@ main { padding: 14px 14px 40px; }
   background: var(--hire-wash); color: var(--hire);
 }
 .person .go { margin-left: auto; color: var(--soft); font-size: 20px; line-height: 1; }
+
+/* スキルの所在バッジ */
+.person .loc {
+  margin-left: auto;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .05em;
+  padding: 2px 7px; border-radius: 3px;
+}
+.person .loc.user     { background: var(--ai-wash); color: var(--ai); }
+.person .loc.obsidian { background: var(--hire-wash); color: var(--hire); }
+
+/* スキルの slug */
+.person .slug {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--soft); align-self: flex-start;
+}
+
 .person .ttl {
   font-family: var(--mono); font-size: 10.5px;
   letter-spacing: .09em; text-transform: uppercase; color: var(--ai);
@@ -234,6 +265,7 @@ main { padding: 14px 14px 40px; }
   font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
   text-transform: uppercase; color: var(--soft); margin: 0 0 8px; font-weight: 400;
 }
+.block[hidden] { display: none; }
 .block ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; }
 .block li { font-size: 14px; }
 
@@ -252,6 +284,7 @@ main { padding: 14px 14px 40px; }
 }
 @media (prefers-color-scheme: dark) { .copy { color: #101219; } }
 .copy:active { opacity: .85; }
+.copy[hidden] { display: none; }
 .copied {
   text-align: center; font-size: 12.5px; color: var(--soft);
   margin: 8px 0 0; min-height: 1.2em;
