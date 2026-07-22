@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-07-21",
+  "note": "スキルじゃないけど呼び出せる思考の型（チートコード）。プロンプトに混ぜて使う。",
+  "frames": [
+    {
+      "slug": "eli5", "name": "ELI5",
+      "sub": "5歳児にもわかるように",
+      "what": "複雑な概念・専門用語を、簡単な言葉とたとえ話で理解したい時。難しい本・記事・契約書の中身を噛み砕く。",
+      "template": "ELI5：[topic] を5歳児にもわかるように、専門用語なし、たとえ話で説明して"
+    },
+    {
+      "slug": "pre-mortem", "name": "Pre-mortem",
+      "sub": "失敗を先取りシミュレーション",
+      "what": "計画・案・ローンチの前に「もし失敗したら、なぜ？」を先に考える。リスクと盲点を洗い出す。",
+      "template": "Pre-mortem：[計画/案] が失敗したと仮定して、その原因を全部リストアップして — リスクと盲点を洗い出す"
+    },
+    {
+      "slug": "steelman", "name": "Steelman",
+      "sub": "反対側の最強バージョンを作る",
+      "what": "自分の考えに反対する意見を、一番説得力のある形で言語化してもらう。本当に正しい判断か検証する時。",
+      "template": "Steelman：[自分の主張] に反対する立場で、一番説得力のある主張を作って"
+    },
+    {
+      "slug": "red-team", "name": "Red team",
+      "sub": "敵視点で穴を探す",
+      "what": "自分の案・コピー・計画に攻撃側で立って、弱点・批判ポイント・突っ込まれそうな部分を洗い出す。",
+      "template": "Red team：[自分の案/コピー/計画] を敵視点で攻撃して — 弱点・批判ポイント・突っ込まれそうな所を全部洗い出す"
+    },
+    {
+      "slug": "first-principles", "name": "First principles",
+      "sub": "根本から考える",
+      "what": "業界の常識・「みんなそうしてるから」を疑って、基本原理まで分解。本質的な解決策・革新的なアイデアを見つける時。",
+      "template": "First principles：[慣習/前提] を基本原理まで分解して、各前提を疑って、本質的な解決策を提案して"
+    },
+    {
+      "slug": "table", "name": "table",
+      "sub": "情報を比較表に整理",
+      "what": "散らかった情報を side-by-side の比較表に整理して、瞬時に判断できるようにする。最後に table と付けるだけ。",
+      "template": "[比較したいもの / 検討中の選択肢 / 情報の羅列]\n\ntable"
+    },
+    {
+      "slug": "v2", "name": "V2",
+      "sub": "直前の回答を再ライト",
+      "what": "Claudeの直前の回答を tighter / sharper / 高品質に書き直させる。安全プレイの答えから、より鋭い版へ。",
+      "template": "V2"
+    },
+    {
+      "slug": "brainstorm", "name": "/brainstorm",
+      "sub": "大量アイデア出し",
+      "what": "安全な1つの答えじゃなく、思いつかないアイデアを大量に投げてもらう。プロンプトの最初に付ける。",
+      "template": "/brainstorm [トピック / 課題]",
+      "examples": [
+        "/brainstorm Honda-Yaの秋メニュー Reel アイデア",
+        "/brainstorm Sip of Japan のチケット販売プッシュ方法"
+      ]
+    },
+    {
+      "slug": "checklist", "name": "/checklist",
+      "sub": "実行可能なチェックリスト化",
+      "what": "曖昧なプラン・プロセス・戦略を、今すぐ実行できる step-by-step のチェックリストに変換。最後に付ける。",
+      "template": "[プラン / プロセス / 戦略の説明]\n\n/checklist"
+    },
+    {
+      "slug": "proofread", "name": "/proofread",
+      "sub": "一発校正",
+      "what": "誤字・awkward な言い回し・分かりにくい部分を1パスで全部修正。テキストを貼った後に付ける。",
+      "template": "[キャプション / メール / Reelスクリプト]\n\n/proofread"
+    }
+  ]
+}

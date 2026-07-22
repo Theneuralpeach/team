@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI チーム</title>
-<meta name="description" content="Monica の AI チーム17人とスキル58個。担当を探して、召喚フレーズをコピーする。">
+<meta name="description" content="Monica の AI チーム17人とスキル87個とフレーム10個。担当を探して、召喚フレーズをコピーする。">
 <meta name="theme-color" content="#101219">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="stylesheet" href="styles.css?v=7">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,6 +21,7 @@
     <div class="tabs" role="tablist" aria-label="表示切替">
       <button id="tab-people" class="tab" role="tab" type="button" aria-selected="true">人</button>
       <button id="tab-skills" class="tab" role="tab" type="button" aria-selected="false">スキル</button>
+      <button id="tab-frames" class="tab" role="tab" type="button" aria-selected="false">フレーム</button>
     </div>
     <button id="triage-open" class="ask" type="button">誰に頼む？</button>
   </div>
@@ -55,6 +56,10 @@
       <p id="sheet-title"></p>
     </div>
     <p id="sheet-summary"></p>
+    <div class="block" id="block-template" hidden>
+      <h3>プロンプト</h3>
+      <pre id="sheet-template"></pre>
+    </div>
     <div class="block" id="block-use">
       <h3 id="use-label">こんな時</h3>
       <ul id="sheet-use"></ul>
@@ -81,6 +86,6 @@
   </div>
 </div>
 
-<script src="app.js?v=4"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>

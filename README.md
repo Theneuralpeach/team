@@ -57,3 +57,15 @@ tools/          正本との照合スクリプト
 
 データは `skills.json`。SKILL.md の description から起こしているが、Monica 向けに短く書き直してあるので手動更新。
 実体との照合は `tools/check-skills.sh`（人数ならぬスキル数のズレを検出）。
+
+## フレームタブ（3ページ目）
+
+「スキルじゃないけど呼び出せる」思考の型10個（ELI5 / Pre-mortem / Steelman / Red team /
+First principles / table / V2 / /brainstorm / /checklist / /proofread）。
+タップするとプロンプトの型が出て、そのままコピーできる。データは `frames.json`。
+
+## スキルは87個に拡張
+
+初版の58個（user + Obsidian）に、anthropic-skills プラグインの Monica 専用スキル29個を追加。
+所在バッジ: `Code`（~/.claude/skills）/ `Obsidian`（vault）/ `Plugin`（anthropic-skills）。
+汎用スキル（docx/pdf/xlsx/frontend-design 等13個）は意図的に非掲載。`tools/check-skills.sh` で確認できる。

@@ -4,7 +4,8 @@
 
   var TEAM = null;     // team.json
   var SKILLS = null;   // skills.json
-  var view = "people"; // "people" | "skills"
+  var FRAMES = null;   // frames.json
+  var view = "people"; // "people" | "skills" | "frames"
   var filter = { people: "all", skills: "all" };
   var query = "";
 
@@ -13,9 +14,10 @@
   /* ---------- 起動 ---------- */
   Promise.all([
     fetch("team.json?v=1").then(function (r) { return r.json(); }),
-    fetch("skills.json?v=1").then(function (r) { return r.json(); })
+    fetch("skills.json?v=2").then(function (r) { return r.json(); }),
+    fetch("frames.json?v=1").then(function (r) { return r.json(); })
   ]).then(function (res) {
-    TEAM = res[0]; SKILLS = res[1]; boot();
+    TEAM = res[0]; SKILLS = res[1]; FRAMES = res[2]; boot();
   }).catch(function () {
     $("roster").innerHTML =
       '<p class="empty">データを読み込めませんでした。通信を確認して開き直してください。</p>';
@@ -26,6 +28,7 @@
 
     $("tab-people").addEventListener("click", function () { setView("people"); });
     $("tab-skills").addEventListener("click", function () { setView("skills"); });
+    $("tab-frames").addEventListener("click", function () { setView("frames"); });
 
     $("q").addEventListener("input", function (e) {
       query = e.target.value.trim().toLowerCase();
@@ -55,11 +58,13 @@
     view = v;
     $("tab-people").setAttribute("aria-selected", v === "people" ? "true" : "false");
     $("tab-skills").setAttribute("aria-selected", v === "skills" ? "true" : "false");
+    $("tab-frames").setAttribute("aria-selected", v === "frames" ? "true" : "false");
     $("triage-open").hidden = v !== "people";
-    $("q").placeholder = v === "people"
-      ? "名前・役割・やりたいこと"
-      : "スキル名・やりたいこと";
-    buildChips();
+    $("chips").hidden = v === "frames";
+    $("q").placeholder = v === "people" ? "名前・役割・やりたいこと"
+      : v === "skills" ? "スキル名・やりたいこと"
+      : "フレーム名・やりたいこと";
+    if (v !== "frames") buildChips();
     render();
     window.scrollTo({ top: 0 });
   }
@@ -108,7 +113,9 @@
 
   /* ---------- 一覧 ---------- */
   function render() {
-    return view === "people" ? renderPeople() : renderSkills();
+    if (view === "people") return renderPeople();
+    if (view === "skills") return renderSkills();
+    return renderFrames();
   }
 
   function renderPeople() {
@@ -157,7 +164,7 @@
       var b = card(false);
       var row = el("div", "row");
       row.appendChild(el("span", "nm", s.name));
-      row.appendChild(el("span", "loc " + s.loc, s.loc === "user" ? "Code" : "Obsidian"));
+      row.appendChild(el("span", "loc " + s.loc, locShort(s.loc)));
       b.appendChild(row);
       b.appendChild(el("code", "slug", s.slug));
       b.appendChild(el("p", "sm", s.what));
@@ -169,6 +176,39 @@
     $("count").textContent = list.length + " / " + SKILLS.skills.length + " 個";
     $("meta").textContent =
       SKILLS.skills.length + "個 · 更新 " + SKILLS.updated;
+  }
+
+  function renderFrames() {
+    var list = FRAMES.frames.filter(function (f) {
+      if (!query) return true;
+      var hay = [f.name, f.slug, f.sub, f.what, f.template].join(" ").toLowerCase();
+      return hay.indexOf(query) !== -1;
+    });
+
+    var roster = $("roster");
+    roster.innerHTML = "";
+    list.forEach(function (f) {
+      var b = card(false);
+      var row = el("div", "row");
+      row.appendChild(el("span", "nm", f.name));
+      row.appendChild(el("span", "go", "›"));
+      b.appendChild(row);
+      b.appendChild(el("div", "ttl", f.sub));
+      b.appendChild(el("p", "sm", f.what));
+      b.addEventListener("click", function () { openFrame(f); });
+      roster.appendChild(b);
+    });
+
+    $("empty").hidden = list.length !== 0;
+    $("count").textContent = list.length + " / " + FRAMES.frames.length + " 個";
+    $("meta").textContent = FRAMES.frames.length + "個の思考フレーム · 更新 " + FRAMES.updated;
+  }
+
+  function locShort(loc) {
+    return loc === "user" ? "Code" : loc === "obsidian" ? "Obsidian" : "Plugin";
+  }
+  function locLong(loc) {
+    return loc === "user" ? "Claude Code" : loc === "obsidian" ? "Obsidian作業" : "プラグイン";
   }
 
   function card(isContract) {
@@ -186,6 +226,8 @@
 
   /* ---------- 詳細（人） ---------- */
   function openPerson(p) {
+    $("block-template").hidden = true;
+    $("block-use").hidden = false;
     $("sheet-name").textContent = p.name + (p.ja ? "（" + p.ja + "）" : "");
     $("sheet-title").textContent = p.title + (p.status === "contract" ? " · 外注" : "");
     $("sheet-summary").textContent = p.summary;
@@ -203,9 +245,10 @@
 
   /* ---------- 詳細（スキル） ---------- */
   function openSkill(s) {
+    $("block-template").hidden = true;
+    $("block-use").hidden = false;
     $("sheet-name").textContent = s.name;
-    $("sheet-title").textContent =
-      s.slug + " · " + (s.loc === "user" ? "Claude Code" : "Obsidian作業");
+    $("sheet-title").textContent = s.slug + " · " + locLong(s.loc);
     $("sheet-summary").textContent = s.what;
 
     $("use-label").textContent = "起動の一言";
@@ -222,6 +265,29 @@
       $("copy").hidden = true;
       $("copied").textContent = "";
     }
+    show($("sheet"));
+  }
+
+  /* ---------- 詳細（フレーム） ---------- */
+  function openFrame(f) {
+    $("sheet-name").textContent = f.name;
+    $("sheet-title").textContent = f.sub;
+    $("sheet-summary").textContent = f.what;
+
+    $("block-template").hidden = false;
+    $("sheet-template").textContent = f.template;
+
+    $("block-tags").hidden = true;
+
+    if (f.examples && f.examples.length) {
+      $("block-use").hidden = false;
+      $("use-label").textContent = "例";
+      fillList($("sheet-use"), f.examples);
+    } else {
+      $("block-use").hidden = true;
+    }
+
+    setCopy(f.template, "プロンプトをコピー");
     show($("sheet"));
   }
 

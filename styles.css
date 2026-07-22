@@ -123,6 +123,7 @@ body {
   scroll-snap-type: x proximity;
 }
 .chips::-webkit-scrollbar { display: none; }
+.chips[hidden] { display: none; }
 
 .chip {
   flex: none; scroll-snap-align: start;
@@ -193,6 +194,7 @@ main { padding: 14px 14px 40px; }
 }
 .person .loc.user     { background: var(--ai-wash); color: var(--ai); }
 .person .loc.obsidian { background: var(--hire-wash); color: var(--hire); }
+.person .loc.plugin   { background: color-mix(in srgb, var(--soft) 16%, transparent); color: var(--soft); }
 
 /* スキルの slug */
 .person .slug {
@@ -268,6 +270,13 @@ main { padding: 14px 14px 40px; }
 .block[hidden] { display: none; }
 .block ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; }
 .block li { font-size: 14px; }
+.block pre {
+  margin: 0; padding: 12px 14px;
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 8px;
+  font-family: var(--mono); font-size: 13px; line-height: 1.55;
+  white-space: pre-wrap; word-break: break-word;
+  -webkit-user-select: text; user-select: text;
+}
 
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tags span {
