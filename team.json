@@ -1,185 +1,552 @@
 {
   "version": "1.0.0",
-  "updated": "2026-07-19",
-  "source": "monica-ai-team plugin v0.2.0 (skills/*/SKILL.md) + 外注3人",
+  "updated": "2026-09-27",
+  "source": "monica-ai-team plugin v0.2.0 (skills/*/SKILL.md) + 外注3人 + ~/.claude/skills（Leo・Juno）",
   "groups": [
-    { "id": "ops",    "label": "経営・運営" },
-    { "id": "make",   "label": "制作" },
-    { "id": "qa",     "label": "品質・心理" },
-    { "id": "client", "label": "クライアント" }
+    {
+      "id": "ops",
+      "label": "経営・運営"
+    },
+    {
+      "id": "make",
+      "label": "制作"
+    },
+    {
+      "id": "qa",
+      "label": "品質・心理"
+    },
+    {
+      "id": "client",
+      "label": "クライアント"
+    }
   ],
   "people": [
     {
-      "id": "oracle", "name": "Oracle", "ja": "オラクル", "group": "ops",
-      "title": "CEO Strategist", "status": "staff",
+      "id": "leo",
+      "name": "Leo",
+      "ja": "レオ",
+      "group": "ops",
+      "title": "分身・相談役",
+      "status": "user",
+      "summary": "職能を持たない代わりに全部を持つ。仕事・お金・締切・体調・生活をつないで、今どうするかを出す。今日あったことを話す相手で、聞いたことは日記に残す。",
+      "use": [
+        "今どうなってる？",
+        "何が残ってる？",
+        "これ前にも言ってた？",
+        "今日あったこと聞いて",
+        "次何すればいい？"
+      ],
+      "tags": [
+        "[Leo]",
+        "[レオ]",
+        "リオ"
+      ]
+    },
+    {
+      "id": "oracle",
+      "name": "Oracle",
+      "ja": "オラクル",
+      "group": "ops",
+      "title": "CEO Strategist",
+      "status": "staff",
       "summary": "月次戦略レビュー、収益構造、契約の続ける・値上げ・卒業の判断、新規事業の見立て。",
-      "use": ["戦略レビューをしたい", "この契約を続けるか迷う", "頭の中を整理したい", "5手先を読みたい"],
-      "tags": ["[戦略]", "[Oracle]", "[オラクル]", "[ストラテジスト]"]
+      "use": [
+        "戦略レビューをしたい",
+        "この契約を続けるか迷う",
+        "頭の中を整理したい",
+        "5手先を読みたい"
+      ],
+      "tags": [
+        "[戦略]",
+        "[Oracle]",
+        "[オラクル]",
+        "[ストラテジスト]"
+      ]
     },
     {
-      "id": "sunny", "name": "Sunny", "ja": "サニー", "group": "ops",
-      "title": "経理", "status": "staff",
+      "id": "sunny",
+      "name": "Sunny",
+      "ja": "サニー",
+      "group": "ops",
+      "title": "経理",
+      "status": "staff",
       "summary": "レシート記録、月次経費レポート、サブスク整理、未収金追跡、請求書ドラフト。事実ベース厳守、語り口は前向きに。",
-      "use": ["レシートを記録したい", "今月いくら使った", "サブスクを整理したい", "請求書を作りたい", "未収金を追いたい"],
-      "tags": ["[経理]", "[Sunny]", "[サニー]"]
+      "use": [
+        "レシートを記録したい",
+        "今月いくら使った",
+        "サブスクを整理したい",
+        "請求書を作りたい",
+        "未収金を追いたい"
+      ],
+      "tags": [
+        "[経理]",
+        "[Sunny]",
+        "[サニー]"
+      ]
     },
     {
-      "id": "niko", "name": "Niko", "ja": "ニコ", "group": "ops",
-      "title": "秘書", "status": "staff",
+      "id": "niko",
+      "name": "Niko",
+      "ja": "ニコ",
+      "group": "ops",
+      "title": "秘書",
+      "status": "staff",
       "summary": "朝ブリーフィング、メール下書き、優先順位整理、open-loops 追跡、インテークとトリアージ。",
-      "use": ["今日何をやるべき", "メールを下書きして", "やりかけを洗い出したい", "優先順位をつけたい"],
-      "tags": ["[秘書]", "[Niko]", "[ニコ]"]
+      "use": [
+        "今日何をやるべき",
+        "メールを下書きして",
+        "やりかけを洗い出したい",
+        "優先順位をつけたい"
+      ],
+      "tags": [
+        "[秘書]",
+        "[Niko]",
+        "[ニコ]"
+      ]
     },
     {
-      "id": "nova", "name": "Nova", "ja": "ノヴァ", "group": "ops",
-      "title": "Research", "status": "staff",
+      "id": "nova",
+      "name": "Nova",
+      "ja": "ノヴァ",
+      "group": "ops",
+      "title": "Research",
+      "status": "staff",
       "summary": "競合分析、トレンドオーディオ調査、市場データ、価格相場、出典付きファクトチェック。",
-      "use": ["競合を調べたい", "相場を知りたい", "この情報の裏を取りたい", "トレンド音源を探したい"],
-      "tags": ["[Research]", "[Nova]", "[ノヴァ]"]
+      "use": [
+        "競合を調べたい",
+        "相場を知りたい",
+        "この情報の裏を取りたい",
+        "トレンド音源を探したい"
+      ],
+      "tags": [
+        "[Research]",
+        "[Nova]",
+        "[ノヴァ]"
+      ]
     },
     {
-      "id": "hope", "name": "Hope", "ja": "知恵 / Chie", "group": "ops",
-      "title": "Knowledge Keeper", "status": "staff",
+      "id": "hope",
+      "name": "Hope",
+      "ja": "知恵 / Chie",
+      "group": "ops",
+      "title": "Knowledge Keeper",
+      "status": "staff",
       "summary": "チャット履歴から決定事項を抽出して CLAUDE.md・Notion・personas に反映。点と点をつなぐ役。",
-      "use": ["前に何を決めたっけ", "この話は前にもした気がする", "ルールとして残したい"],
-      "tags": ["[ナレッジ]", "[Hope]", "[知恵]", "[Chie]"]
+      "use": [
+        "前に何を決めたっけ",
+        "この話は前にもした気がする",
+        "ルールとして残したい"
+      ],
+      "tags": [
+        "[ナレッジ]",
+        "[Hope]",
+        "[知恵]",
+        "[Chie]"
+      ]
     },
     {
-      "id": "harmony", "name": "Harmony", "ja": "ハーモニー", "group": "ops",
-      "title": "ウェルネス", "status": "staff",
+      "id": "harmony",
+      "name": "Harmony",
+      "ja": "ハーモニー",
+      "group": "ops",
+      "title": "ウェルネス",
+      "status": "staff",
       "summary": "日記管理、アレルギーの多角的調査、ストレスサインへの声かけ、睡眠・運動ログの管理。",
-      "use": ["体調がしんどい", "睡眠を記録したい", "アレルギーを調べたい", "日記をつけたい"],
-      "tags": ["[ウェルネス]", "[Harmony]", "[ハーモニー]"]
+      "use": [
+        "体調がしんどい",
+        "睡眠を記録したい",
+        "アレルギーを調べたい",
+        "日記をつけたい"
+      ],
+      "tags": [
+        "[ウェルネス]",
+        "[Harmony]",
+        "[ハーモニー]"
+      ]
     },
     {
-      "id": "rui", "name": "Rui", "ja": "ルイ", "group": "ops",
-      "title": "Sales / Account", "status": "contract",
+      "id": "rui",
+      "name": "Rui",
+      "ja": "ルイ",
+      "group": "ops",
+      "title": "Sales / Account",
+      "status": "contract",
       "summary": "作らない。売って、値段を決めて、要件を閉じる。買う理由がクライアント側の言葉になっているかを見る。",
-      "use": ["いくらで売るか決めたい", "パッケージを定義したい", "この提案は通るか", "要件を閉じたい"],
-      "tags": ["[営業]", "[Rui]", "[ルイ]"]
+      "use": [
+        "いくらで売るか決めたい",
+        "パッケージを定義したい",
+        "この提案は通るか",
+        "要件を閉じたい"
+      ],
+      "tags": [
+        "[営業]",
+        "[Rui]",
+        "[ルイ]"
+      ]
     },
-
     {
-      "id": "sora", "name": "Sora", "ja": "空", "group": "make",
-      "title": "静止画 AD / 制作", "status": "staff",
+      "id": "sora",
+      "name": "Sora",
+      "ja": "空",
+      "group": "make",
+      "title": "静止画 AD / 制作",
+      "status": "staff",
       "summary": "IG カルーセル、Reel カバー、Story、ポスター、フライヤー、請求書や資料のレイアウト、印刷物。批評だけでなく現物まで出す。",
-      "use": ["カルーセルを作って", "これダサい", "AIっぽい", "ポスターを作りたい", "資料の見た目を直したい"],
-      "tags": ["[デザイン]", "[Sora]", "[空]"]
+      "use": [
+        "カルーセルを作って",
+        "これダサい",
+        "AIっぽい",
+        "ポスターを作りたい",
+        "資料の見た目を直したい"
+      ],
+      "tags": [
+        "[デザイン]",
+        "[Sora]",
+        "[空]"
+      ]
     },
     {
-      "id": "kai", "name": "Kai", "ja": "カイ", "group": "make",
-      "title": "Web / LP 実装", "status": "staff",
+      "id": "kai",
+      "name": "Kai",
+      "ja": "カイ",
+      "group": "make",
+      "title": "Web / LP 実装",
+      "status": "staff",
       "summary": "LP、イベント募集ページ、キャンペーンサイト、ダッシュボード、PWA、UI。設計から HTML まで出す。",
-      "use": ["ランディングページを作って", "募集ページがほしい", "サイトを作りたい", "アプリを作りたい"],
-      "tags": ["[Web]", "[LP]", "[Kai]", "[カイ]"]
+      "use": [
+        "ランディングページを作って",
+        "募集ページがほしい",
+        "サイトを作りたい",
+        "アプリを作りたい"
+      ],
+      "tags": [
+        "[Web]",
+        "[LP]",
+        "[Kai]",
+        "[カイ]"
+      ]
     },
     {
-      "id": "vera", "name": "Vera", "ja": "ヴェラ", "group": "make",
-      "title": "Art Director — 判定", "status": "contract",
+      "id": "juno",
+      "name": "Juno",
+      "ja": "ジュノ",
+      "group": "make",
+      "title": "動画クリエイター",
+      "status": "user",
+      "summary": "Reel・ショート動画を企画から書き出しまで。素材選び、カット、字幕、色、音、AI動画、書き出し後のQA。重い作業は裏方エージェント版が片づける。",
+      "use": [
+        "動画を作って",
+        "Reelを編集して",
+        "字幕をつけて",
+        "フィルムっぽくして",
+        "この動画どうやって作ってる？"
+      ],
+      "tags": [
+        "[動画]",
+        "[Juno]",
+        "[ジュノ]"
+      ]
+    },
+    {
+      "id": "vera",
+      "name": "Vera",
+      "ja": "ヴェラ",
+      "group": "make",
+      "title": "Art Director — 判定",
+      "status": "contract",
       "summary": "作る人ではなく落とす人。却下基準を言語化して、案件をまたいで同じ美意識を通す。理由を一行で言えない案を殺す役。",
-      "use": ["どの案がいいか決められない", "却下基準を作りたい", "全体の統一感がない", "書体を整理したい"],
-      "tags": ["[AD]", "[Vera]", "[ヴェラ]"]
+      "use": [
+        "どの案がいいか決められない",
+        "却下基準を作りたい",
+        "全体の統一感がない",
+        "書体を整理したい"
+      ],
+      "tags": [
+        "[AD]",
+        "[Vera]",
+        "[ヴェラ]"
+      ]
     },
-
     {
-      "id": "echo", "name": "Echo", "ja": "エコー", "group": "qa",
-      "title": "Delivery QA", "status": "staff",
+      "id": "echo",
+      "name": "Echo",
+      "ja": "エコー",
+      "group": "qa",
+      "title": "Delivery QA",
+      "status": "staff",
       "summary": "外部に出る前の最終チェック。ブランド・トーン・CTA・AI タレル・em dash を捕まえる。送信前は必ずここを通す。",
-      "use": ["送る前にチェックして", "ブランドからズレてない", "私らしく直して", "AIっぽくない？"],
-      "tags": ["[QA]", "[Echo]", "[エコー]"]
+      "use": [
+        "送る前にチェックして",
+        "ブランドからズレてない",
+        "私らしく直して",
+        "AIっぽくない？"
+      ],
+      "tags": [
+        "[QA]",
+        "[Echo]",
+        "[エコー]"
+      ]
     },
     {
-      "id": "mia", "name": "Mia", "ja": "ミア", "group": "qa",
-      "title": "購買心理 / CRO", "status": "staff",
+      "id": "mia",
+      "name": "Mia",
+      "ja": "ミア",
+      "group": "qa",
+      "title": "購買心理 / CRO",
+      "status": "staff",
       "summary": "申し込む・買う・予約するまで人が動く理由を設計。CTA 文言、フォーム摩擦削減、離脱診断。数字は事実のみ。",
-      "use": ["申込率を上げたい", "CTA の文言を考えて", "なぜ動いてくれない", "締切の設計をしたい"],
-      "tags": ["[心理]", "[CRO]", "[Mia]", "[ミア]"]
+      "use": [
+        "申込率を上げたい",
+        "CTA の文言を考えて",
+        "なぜ動いてくれない",
+        "締切の設計をしたい"
+      ],
+      "tags": [
+        "[心理]",
+        "[CRO]",
+        "[Mia]",
+        "[ミア]"
+      ]
     },
     {
-      "id": "cal", "name": "Cal", "ja": "キャル", "group": "qa",
-      "title": "英語コピー", "status": "contract",
+      "id": "cal",
+      "name": "Cal",
+      "ja": "キャル",
+      "group": "qa",
+      "title": "英語コピー",
+      "status": "contract",
       "summary": "英語ネイティブ、ダイレクトレスポンス畑。日本語のコピーを英訳させない。何も約束していない見出しを書き直す。",
-      "use": ["英語のコピーを書いて", "この英語は自然？", "ヒーローの一行を決めたい", "翻訳っぽさを消したい"],
-      "tags": ["[EN]", "[Cal]", "[キャル]"]
+      "use": [
+        "英語のコピーを書いて",
+        "この英語は自然？",
+        "ヒーローの一行を決めたい",
+        "翻訳っぽさを消したい"
+      ],
+      "tags": [
+        "[EN]",
+        "[Cal]",
+        "[キャル]"
+      ]
     },
-
     {
-      "id": "honda-ya", "name": "HONDA-YA", "ja": "本多屋", "group": "client",
-      "title": "居酒屋 — Tustin", "status": "staff",
+      "id": "honda-ya",
+      "name": "HONDA-YA",
+      "ja": "本多屋",
+      "group": "client",
+      "title": "居酒屋 — Tustin",
+      "status": "staff",
       "summary": "SNS 全般、プランニング、スケジューリング、ブランドディレクション。テーマは和気あいあい。予約なし、walk-in only。",
-      "use": ["HONDA-YA の投稿を作りたい", "リールの企画がほしい", "ギブアウェイを考えたい"],
-      "tags": ["[HONDA-YA]"]
+      "use": [
+        "HONDA-YA の投稿を作りたい",
+        "リールの企画がほしい",
+        "ギブアウェイを考えたい"
+      ],
+      "tags": [
+        "[HONDA-YA]"
+      ]
     },
     {
-      "id": "kappo", "name": "Kappo Honda", "ja": "割烹本多", "group": "client",
-      "title": "系列店 — 50席", "status": "staff",
+      "id": "kappo",
+      "name": "Kappo Honda",
+      "ja": "割烹本多",
+      "group": "client",
+      "title": "系列店 — 50席",
+      "status": "staff",
       "summary": "HONDA-YA とは別ブランドとして書き分ける。落ち着きと品質、デート寄り。インフルエンサー路線。walk-in only。",
-      "use": ["Kappo の投稿を作りたい", "インフルエンサーを探したい", "落ち着いたトーンで書いて"],
-      "tags": ["[Kappo]"]
+      "use": [
+        "Kappo の投稿を作りたい",
+        "インフルエンサーを探したい",
+        "落ち着いたトーンで書いて"
+      ],
+      "tags": [
+        "[Kappo]"
+      ]
     },
     {
-      "id": "eyelinq", "name": "Eyelinq", "ja": "アイリンク", "group": "client",
-      "title": "ラッシュ — Beverly Hills", "status": "staff",
-      "summary": "Instagram・TikTok・ViviNavi・LinkedIn のオンライン全般。表記はセンテンスケース（all lowercase は誤り）。",
-      "use": ["Eyelinq の投稿を作りたい", "ラッシュの写真を選びたい", "びびなびの掲載文を書きたい"],
-      "tags": ["[Eyelinq]"]
-    },
-    {
-      "id": "tanoshii", "name": "Tanoshii Project", "ja": "たのしいプロジェクト", "group": "client",
-      "title": "イベント — TOJ / Sip", "status": "staff",
+      "id": "tanoshii",
+      "name": "Tanoshii Project",
+      "ja": "たのしいプロジェクト",
+      "group": "client",
+      "title": "イベント — TOJ / Sip",
+      "status": "staff",
       "summary": "Taste of Japan、Sushi Pop、Sip of Japan の SNS マネジメントとプロデュース。チケット導線とイベント告知。",
-      "use": ["イベントの告知を作りたい", "チケットを売りたい", "ベンダー紹介を作りたい"],
-      "tags": ["[Tanoshii]"]
+      "use": [
+        "イベントの告知を作りたい",
+        "チケットを売りたい",
+        "ベンダー紹介を作りたい"
+      ],
+      "tags": [
+        "[Tanoshii]"
+      ]
+    },
+    {
+      "id": "eyelinq",
+      "name": "Eyelinq",
+      "ja": "アイリンク",
+      "group": "client",
+      "title": "ラッシュ — Beverly Hills（2026年8月で終了）",
+      "status": "ended",
+      "summary": "2026年8月で終了したクライアント。新しい企画・提案には入れない。過去の記録を見るとき用に残している。",
+      "use": [
+        "Eyelinq の投稿を作りたい",
+        "ラッシュの写真を選びたい",
+        "びびなびの掲載文を書きたい"
+      ],
+      "tags": [
+        "[Eyelinq]"
+      ]
     }
   ],
   "triage": [
     {
       "q": "何をしたい？",
       "options": [
-        { "label": "ものを作る",        "next": "make" },
-        { "label": "出す前に確認したい", "to": ["echo", "vera"] },
-        { "label": "決めたい・考えたい", "next": "think" },
-        { "label": "お金・事務",        "next": "admin" },
-        { "label": "クライアントの仕事", "next": "client" },
-        { "label": "自分のこと",        "to": ["harmony", "hope"] }
+        {
+          "label": "ものを作る",
+          "next": "make"
+        },
+        {
+          "label": "出す前に確認したい",
+          "to": [
+            "echo",
+            "vera"
+          ]
+        },
+        {
+          "label": "決めたい・考えたい",
+          "next": "think"
+        },
+        {
+          "label": "お金・事務",
+          "next": "admin"
+        },
+        {
+          "label": "クライアントの仕事",
+          "next": "client"
+        },
+        {
+          "label": "自分のこと",
+          "to": [
+            "leo",
+            "harmony",
+            "hope"
+          ]
+        }
       ]
     },
     {
       "id": "make",
       "q": "最終形はどれ？",
       "options": [
-        { "label": "見る画像（カルーセル・ポスター・資料）", "to": ["sora"] },
-        { "label": "触るページ（LP・サイト・アプリ）",     "to": ["kai", "mia"] },
-        { "label": "英語の文章",                          "to": ["cal"] },
-        { "label": "どれか迷う",                          "to": ["vera"] }
+        {
+          "label": "見る画像（カルーセル・ポスター・資料）",
+          "to": [
+            "sora"
+          ]
+        },
+        {
+          "label": "触るページ（LP・サイト・アプリ）",
+          "to": [
+            "kai",
+            "mia"
+          ]
+        },
+        {
+          "label": "動画（Reel・ショート）",
+          "to": [
+            "juno"
+          ]
+        },
+        {
+          "label": "英語の文章",
+          "to": [
+            "cal"
+          ]
+        },
+        {
+          "label": "どれか迷う",
+          "to": [
+            "vera"
+          ]
+        }
       ]
     },
     {
       "id": "think",
       "q": "どっち寄り？",
       "options": [
-        { "label": "事業・契約・長期の判断", "to": ["oracle"] },
-        { "label": "売り方・値段",         "to": ["rui"] },
-        { "label": "調べてから決めたい",    "to": ["nova"] },
-        { "label": "前に決めたことを知りたい", "to": ["hope"] }
+        {
+          "label": "全部まとめて見てほしい",
+          "to": [
+            "leo"
+          ]
+        },
+        {
+          "label": "事業・契約・長期の判断",
+          "to": [
+            "oracle"
+          ]
+        },
+        {
+          "label": "売り方・値段",
+          "to": [
+            "rui"
+          ]
+        },
+        {
+          "label": "調べてから決めたい",
+          "to": [
+            "nova"
+          ]
+        },
+        {
+          "label": "前に決めたことを知りたい",
+          "to": [
+            "hope"
+          ]
+        }
       ]
     },
     {
       "id": "admin",
       "q": "どれ？",
       "options": [
-        { "label": "経費・請求書・サブスク", "to": ["sunny"] },
-        { "label": "メール・段取り・優先順位", "to": ["niko"] }
+        {
+          "label": "経費・請求書・サブスク",
+          "to": [
+            "sunny"
+          ]
+        },
+        {
+          "label": "メール・段取り・優先順位",
+          "to": [
+            "niko"
+          ]
+        }
       ]
     },
     {
       "id": "client",
       "q": "どのクライアント？",
       "options": [
-        { "label": "HONDA-YA",         "to": ["honda-ya"] },
-        { "label": "Kappo Honda",      "to": ["kappo"] },
-        { "label": "Eyelinq",          "to": ["eyelinq"] },
-        { "label": "Tanoshii Project", "to": ["tanoshii"] }
+        {
+          "label": "HONDA-YA",
+          "to": [
+            "honda-ya"
+          ]
+        },
+        {
+          "label": "Kappo Honda",
+          "to": [
+            "kappo"
+          ]
+        },
+        {
+          "label": "Tanoshii Project",
+          "to": [
+            "tanoshii"
+          ]
+        }
       ]
     }
   ]

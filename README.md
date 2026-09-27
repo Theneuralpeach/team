@@ -1,6 +1,6 @@
 # AI チーム
 
-Monica の AI チーム 17人（社員14＋外注3）を携帯から引くための PWA。
+Monica の AI チーム 19人を携帯から引くための PWA。内訳はプラグイン社員14＋外注3（Vera / Cal / Rui）＋ユーザースキル2（Leo / Juno）。Eyelinq は 2026年8月で終了したので「終了」バッジを付けて一番下に置いている。
 
 https://theneuralpeach.github.io/team/
 
@@ -27,6 +27,8 @@ https://theneuralpeach.github.io/team/
 社員が一致していれば `一致 ✓` が出る。外注3人（Vera / Cal / Rui）はプラグイン外なので
 照合対象から外してある。常設化したらスキル化して `status` を `staff` に変える。
 
+`status` の種類: `staff`（プラグイン社員）/ `contract`（外注）/ `user`（`~/.claude/skills/` にある人格。Leo・Juno）/ `ended`（終了したクライアント。灰色表示・振り分けから除外）。
+
 ## 更新の手順
 
 1. `team.json` を編集
@@ -40,7 +42,7 @@ https://theneuralpeach.github.io/team/
 index.html      画面
 styles.css      見た目
 app.js          一覧・検索・絞り込み・コピー・振り分け
-team.json       データ（17人＋振り分けの分岐）
+team.json       データ（19人＋振り分けの分岐）
 sw.js           オフライン用（ネット優先・落ちたらキャッシュ）
 manifest.json   ホーム画面インストール用
 tools/          正本との照合スクリプト

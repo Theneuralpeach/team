@@ -13,7 +13,7 @@
 
   /* ---------- 起動 ---------- */
   Promise.all([
-    fetch("team.json?v=1").then(function (r) { return r.json(); }),
+    fetch("team.json?v=2").then(function (r) { return r.json(); }),
     fetch("skills.json?v=2").then(function (r) { return r.json(); }),
     fetch("frames.json?v=1").then(function (r) { return r.json(); })
   ]).then(function (res) {
@@ -131,11 +131,12 @@
     var roster = $("roster");
     roster.innerHTML = "";
     list.forEach(function (p) {
-      var b = card(p.status === "contract");
+      var b = card(p.status === "contract", p.status === "ended");
       var row = el("div", "row");
       row.appendChild(el("span", "nm", p.name));
       if (p.ja) row.appendChild(el("span", "ja", p.ja));
       if (p.status === "contract") row.appendChild(el("span", "badge", "外注"));
+      if (p.status === "ended") row.appendChild(el("span", "badge ended", "終了"));
       b.appendChild(row);
       b.appendChild(el("div", "ttl", p.title));
       b.appendChild(el("p", "sm", p.summary));
@@ -211,10 +212,10 @@
     return loc === "user" ? "Claude Code" : loc === "obsidian" ? "Obsidian作業" : "プラグイン";
   }
 
-  function card(isContract) {
+  function card(isContract, isEnded) {
     var b = document.createElement("button");
     b.type = "button";
-    b.className = "person" + (isContract ? " contract" : "");
+    b.className = "person" + (isContract ? " contract" : "") + (isEnded ? " ended" : "");
     return b;
   }
   function el(tag, cls, text) {
@@ -229,7 +230,7 @@
     $("block-template").hidden = true;
     $("block-use").hidden = false;
     $("sheet-name").textContent = p.name + (p.ja ? "（" + p.ja + "）" : "");
-    $("sheet-title").textContent = p.title + (p.status === "contract" ? " · 外注" : "");
+    $("sheet-title").textContent = p.title + (p.status === "contract" ? " · 外注" : "") + (p.status === "ended" ? " · 終了" : "");
     $("sheet-summary").textContent = p.summary;
 
     $("use-label").textContent = "こんな時";

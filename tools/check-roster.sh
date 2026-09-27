@@ -29,7 +29,7 @@ app=$(python3 -c '
 import json
 d = json.load(open("team.json"))
 print("\n".join(sorted(
-    p.get("skill", p["id"]) for p in d["people"] if p["status"] == "staff"
+    p.get("skill", p["id"]) for p in d["people"] if p["status"] in ("staff", "ended")
 )))')
 
 # team.json の id とスキル名の対応（違うものだけ手で対応表に足す）
@@ -58,4 +58,14 @@ if [ $status -eq 0 ]; then
   echo "社員 $(printf '%s\n' "$skills" | wc -l | tr -d " ")人 一致 ✓"
 fi
 echo "外注（プラグイン外）: ${contract:-なし}"
+others=$(python3 -c '
+import json
+d = json.load(open("team.json"))
+for st, label in (("user", "ユーザースキル"), ("ended", "終了")):
+    names = " ".join(p["name"] for p in d["people"] if p["status"] == st)
+    print(label + ": " + (names or "なし"))')
+echo "$others"
+for s in $(python3 -c 'import json;print(" ".join(p["id"] for p in json.load(open("team.json"))["people"] if p["status"]=="user"))'); do
+  [ -f "$HOME/.claude/skills/$s/SKILL.md" ] || { echo "  ~/.claude/skills/$s が見つかりません"; status=1; }
+done
 exit $status

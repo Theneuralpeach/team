@@ -184,6 +184,8 @@ main { padding: 14px 14px 40px; }
   padding: 2px 7px; border-radius: 3px;
   background: var(--hire-wash); color: var(--hire);
 }
+.person.ended { opacity: .55; }
+.person .badge.ended { background: color-mix(in srgb, var(--soft) 16%, transparent); color: var(--soft); }
 .person .go { margin-left: auto; color: var(--soft); font-size: 20px; line-height: 1; }
 
 /* スキルの所在バッジ */
