@@ -17,7 +17,7 @@
     fetch("team.json?v=3").then(function (r) { return r.json(); }),
     fetch("skills.json?v=4").then(function (r) { return r.json(); }),
     fetch("frames.json?v=3").then(function (r) { return r.json(); }),
-    fetch("shortcuts.json?v=1").then(function (r) { return r.json(); })
+    fetch("shortcuts.json?v=2").then(function (r) { return r.json(); })
   ]).then(function (res) {
     TEAM = res[0]; SKILLS = res[1]; FRAMES = res[2]; SHORTCUTS = res[3]; boot();
   }).catch(function () {
