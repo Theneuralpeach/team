@@ -453,7 +453,7 @@
    "slug": "adobe-design-from-template",
    "name": "Expressデザイン",
    "cat": "media",
-   "loc": "user",
+   "loc": "plugin",
    "what": "Adobe Expressテンプレでフライヤー・ポスター・SNS投稿・名刺などを作る。",
    "trigger": "Expressで○○作って"
   },
@@ -461,7 +461,7 @@
    "slug": "adobe-batch-edit-photos",
    "name": "写真一括編集",
    "cat": "media",
-   "loc": "user",
+   "loc": "plugin",
    "what": "複数写真に同じ調整をかけて、まとめて編集したように統一する。",
    "trigger": "この写真たち同じトーンに"
   },
@@ -469,7 +469,7 @@
    "slug": "adobe-retouch-portraits",
    "name": "ポートレート補正",
    "cat": "media",
-   "loc": "user",
+   "loc": "plugin",
    "what": "ポートレートのフォルダを一括レタッチ。自動傾き補正・トーン・ライト。",
    "trigger": "このポートレート補正して"
   },
@@ -477,7 +477,7 @@
    "slug": "adobe-create-social-variations",
    "name": "SNSサイズ展開",
    "cat": "media",
-   "loc": "user",
+   "loc": "plugin",
    "what": "画像・動画を各SNS向けにリサイズ・クロップ・書き出し。被写体を考慮。",
    "trigger": "各SNSサイズに展開して"
   },
@@ -485,7 +485,7 @@
    "slug": "adobe-resize-photos-and-videos",
    "name": "リサイズ",
    "cat": "media",
-   "loc": "user",
+   "loc": "plugin",
    "what": "写真・動画を指定の寸法・比率にリサイズ（4K・HD・A4など）。",
    "trigger": "○○にリサイズして"
   },
@@ -493,7 +493,7 @@
    "slug": "adobe-edit-quick-cut",
    "name": "Quick Cut",
    "cat": "media",
-   "loc": "user",
+   "loc": "plugin",
    "what": "動画からハイライトのシズルリールを作る。",
    "trigger": "この動画をハイライトに"
   },
