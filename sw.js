@@ -1,13 +1,13 @@
 /* オフライン用。データを変えたら CACHE を上げる。 */
-var CACHE = "team-v8";
+var CACHE = "team-v10";
 var ASSETS = [
   "./",
   "./index.html",
   "./styles.css?v=8",
-  "./app.js?v=6",
-  "./team.json?v=2",
-  "./skills.json?v=2",
-  "./frames.json?v=1",
+  "./app.js?v=8",
+  "./team.json?v=3",
+  "./skills.json?v=3",
+  "./frames.json?v=3",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png"

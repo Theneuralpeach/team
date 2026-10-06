@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
-  "updated": "2026-09-27",
-  "source": "monica-ai-team plugin v0.2.0 (skills/*/SKILL.md) + 外注3人 + ~/.claude/skills（Leo・Juno）",
+  "version": "1.1.0",
+  "updated": "2026-10-05",
+  "source": "monica-ai-team プラグイン（12人）+ ~/.claude/skills の個人スキル（Leo・Juno・Kai・Mia・Vera・Cal・Rui）",
   "groups": [
     {
       "id": "ops",
@@ -170,7 +170,7 @@
       "ja": "ルイ",
       "group": "ops",
       "title": "Sales / Account",
-      "status": "contract",
+      "status": "user",
       "summary": "作らない。売って、値段を決めて、要件を閉じる。買う理由がクライアント側の言葉になっているかを見る。",
       "use": [
         "いくらで売るか決めたい",
@@ -211,7 +211,7 @@
       "ja": "カイ",
       "group": "make",
       "title": "Web / LP 実装",
-      "status": "staff",
+      "status": "user",
       "summary": "LP、イベント募集ページ、キャンペーンサイト、ダッシュボード、PWA、UI。設計から HTML まで出す。",
       "use": [
         "ランディングページを作って",
@@ -253,7 +253,7 @@
       "ja": "ヴェラ",
       "group": "make",
       "title": "Art Director — 判定",
-      "status": "contract",
+      "status": "user",
       "summary": "作る人ではなく落とす人。却下基準を言語化して、案件をまたいで同じ美意識を通す。理由を一行で言えない案を殺す役。",
       "use": [
         "どの案がいいか決められない",
@@ -293,7 +293,7 @@
       "ja": "ミア",
       "group": "qa",
       "title": "購買心理 / CRO",
-      "status": "staff",
+      "status": "user",
       "summary": "申し込む・買う・予約するまで人が動く理由を設計。CTA 文言、フォーム摩擦削減、離脱診断。数字は事実のみ。",
       "use": [
         "申込率を上げたい",
@@ -314,7 +314,7 @@
       "ja": "キャル",
       "group": "qa",
       "title": "英語コピー",
-      "status": "contract",
+      "status": "user",
       "summary": "英語ネイティブ、ダイレクトレスポンス畑。日本語のコピーを英訳させない。何も約束していない見出しを書き直す。",
       "use": [
         "英語のコピーを書いて",
@@ -367,9 +367,9 @@
       "name": "Tanoshii Project",
       "ja": "たのしいプロジェクト",
       "group": "client",
-      "title": "イベント — TOJ / Sip",
-      "status": "staff",
-      "summary": "Taste of Japan、Sushi Pop、Sip of Japan の SNS マネジメントとプロデュース。チケット導線とイベント告知。",
+      "title": "イベント — TOJ / Sip（終了）",
+      "status": "ended",
+      "summary": "終了扱いのクライアント。新しい企画・提案には入れない。過去の記録を見るとき用に残している。",
       "use": [
         "イベントの告知を作りたい",
         "チケットを売りたい",
@@ -539,12 +539,6 @@
           "label": "Kappo Honda",
           "to": [
             "kappo"
-          ]
-        },
-        {
-          "label": "Tanoshii Project",
-          "to": [
-            "tanoshii"
           ]
         }
       ]

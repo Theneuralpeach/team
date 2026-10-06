@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# team.json と monica-ai-team プラグインの実体がズレていないか照合する。
+# team.json と、monica-ai-team プラグイン / ~/.claude/skills の実体がズレていないか照合する。
 #
 # 使い方:  ./tools/check-roster.sh
 #
@@ -24,7 +24,12 @@ fi
 echo "プラグイン: $PLUGIN"
 echo
 
-skills=$(ls "$PLUGIN/skills" | sort)
+# 個人スキル（~/.claude/skills）に移った人は、プラグインの古いコピーに残っていても数えない
+user_ids=$(python3 -c '
+import json
+d = json.load(open("team.json"))
+print("\n".join(sorted(p["id"] for p in d["people"] if p["status"] == "user")))')
+skills=$(comm -23 <(ls "$PLUGIN/skills" | sort) <(printf '%s\n' "$user_ids"))
 app=$(python3 -c '
 import json
 d = json.load(open("team.json"))

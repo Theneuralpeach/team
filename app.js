@@ -13,9 +13,9 @@
 
   /* ---------- 起動 ---------- */
   Promise.all([
-    fetch("team.json?v=2").then(function (r) { return r.json(); }),
-    fetch("skills.json?v=2").then(function (r) { return r.json(); }),
-    fetch("frames.json?v=1").then(function (r) { return r.json(); })
+    fetch("team.json?v=3").then(function (r) { return r.json(); }),
+    fetch("skills.json?v=3").then(function (r) { return r.json(); }),
+    fetch("frames.json?v=3").then(function (r) { return r.json(); })
   ]).then(function (res) {
     TEAM = res[0]; SKILLS = res[1]; FRAMES = res[2]; boot();
   }).catch(function () {
@@ -162,10 +162,11 @@
     var roster = $("roster");
     roster.innerHTML = "";
     list.forEach(function (s) {
-      var b = card(false);
+      var b = card(false, s.ended);
       var row = el("div", "row");
       row.appendChild(el("span", "nm", s.name));
       row.appendChild(el("span", "loc " + s.loc, locShort(s.loc)));
+      if (s.ended) row.appendChild(el("span", "badge ended", "終了"));
       b.appendChild(row);
       b.appendChild(el("code", "slug", s.slug));
       b.appendChild(el("p", "sm", s.what));
@@ -206,10 +207,10 @@
   }
 
   function locShort(loc) {
-    return loc === "user" ? "Code" : loc === "obsidian" ? "Obsidian" : "Plugin";
+    return loc === "user" ? "個人" : loc === "obsidian" ? "Obsidian" : "プラグイン";
   }
   function locLong(loc) {
-    return loc === "user" ? "Claude Code" : loc === "obsidian" ? "Obsidian作業" : "プラグイン";
+    return loc === "user" ? "個人スキル（どこでも使える）" : loc === "obsidian" ? "Obsidian作業で使う" : "プラグイン（どこでも使える）";
   }
 
   function card(isContract, isEnded) {
@@ -249,7 +250,7 @@
     $("block-template").hidden = true;
     $("block-use").hidden = false;
     $("sheet-name").textContent = s.name;
-    $("sheet-title").textContent = s.slug + " · " + locLong(s.loc);
+    $("sheet-title").textContent = s.slug + " · " + locLong(s.loc) + (s.ended ? " · 終了" : "");
     $("sheet-summary").textContent = s.what;
 
     $("use-label").textContent = "起動の一言";

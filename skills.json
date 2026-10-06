@@ -1,6 +1,6 @@
 {
- "version": "1.0.0",
- "updated": "2026-07-21",
+ "version": "1.1.0",
+ "updated": "2026-10-05",
  "note": "user=Claude Codeで常に / obsidian=Obsidian作業で / plugin=anthropic-skillsプラグインで使える",
  "cats": [
   {
@@ -711,7 +711,8 @@
    "cat": "copy",
    "loc": "plugin",
    "what": "EYELINQ（ラッシュ）のキャプション・カルーセル・Reelコンセプト。センテンスケース。",
-   "trigger": "EYELINQの投稿作って"
+   "trigger": "EYELINQの投稿作って",
+   "ended": true
   },
   {
    "slug": "taste-of-japan-carousel",
@@ -719,7 +720,8 @@
    "cat": "design",
    "loc": "plugin",
    "what": "@tasteofjapan用のIGカルーセル。デザインシステム適用済みのHTMLスライド。",
-   "trigger": "Taste of Japanのカルーセル作って"
+   "trigger": "Taste of Japanのカルーセル作って",
+   "ended": true
   },
   {
    "slug": "bivinavi-listing",
@@ -727,7 +729,8 @@
    "cat": "copy",
    "loc": "plugin",
    "what": "日系ディレクトリBivinaviのEyelinq掲載文（英語・見出し＋本文）。",
-   "trigger": "びびなびの掲載文書いて"
+   "trigger": "びびなびの掲載文書いて",
+   "ended": true
   },
   {
    "slug": "tiktok-crosspost",
@@ -736,6 +739,54 @@
    "loc": "plugin",
    "what": "IG投稿をTikTok用にリライト。Honda-Ya/Kappo/EYELINQのアカウント別。",
    "trigger": "TikTok用に書き直して"
+  },
+  {
+   "slug": "film-grade",
+   "name": "フィルム調",
+   "cat": "media",
+   "loc": "user",
+   "what": "撮って出しのスマホ映像を、フィルムっぽい色にする。4つの調整を1つの3D LUTにまとめて、ffmpegで一発適用。",
+   "trigger": "フィルムっぽくして / 色を整えて"
+  },
+  {
+   "slug": "ai-video-remake",
+   "name": "AI動画リメイク",
+   "cat": "media",
+   "loc": "user",
+   "what": "バズった動画を見本に、撮影も編集もなしでAI動画として作り直す。見本の解析からショット表、プロンプト、生成まで。",
+   "trigger": "このAI動画再現して / リメイクして"
+  },
+  {
+   "slug": "project-recall",
+   "name": "プロジェクト想起",
+   "cat": "think",
+   "loc": "user",
+   "what": "案件やクライアントを開いた時、Vaultに残した過去のアイデア・決定・やり残しを、自分から思い出して出す。",
+   "trigger": "自動で発火（案件を開いた時） / 前に出たアイデアを全部出して"
+  },
+  {
+   "slug": "monica-auto-capability-router",
+   "name": "能力ルーター",
+   "cat": "biz",
+   "loc": "obsidian",
+   "what": "依頼ごとに、いちばん合うスキル・道具・確認手順を自動で選ぶ。機能名を覚えなくていい。",
+   "trigger": "自動で発火（手のかかる依頼の時）"
+  },
+  {
+   "slug": "obsidian-cli",
+   "name": "Obsidian CLI",
+   "cat": "wiki",
+   "loc": "obsidian",
+   "what": "起動中のObsidianを操作する。リンクを壊さない移動・改名、プロパティ、画面の確認。",
+   "trigger": "リンクを壊さずに移動して / Obsidianで開いて確認して"
+  },
+  {
+   "slug": "medium-delta-miner",
+   "name": "Medium抽出",
+   "cat": "wiki",
+   "loc": "obsidian",
+   "what": "Mediumの記事から、使える新しい部分だけを取り出してVaultに入れる。",
+   "trigger": "このMedium記事を取り込んで"
   }
  ]
 }
