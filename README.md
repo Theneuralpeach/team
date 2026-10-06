@@ -78,6 +78,11 @@ ELI5 / Pre-mortem / Steelman / Red team / First principles / table / V2 / /brain
 | 学習 | フォント・理論・手法をClaudeに覚えさせる | wiki やスキルへの記録のみ |
 | 実践 | 動画の中身を Monica 自身がやる | 手順書とやることリスト |
 
+## Mac タブ（4ページ目）
+
+Finder のショートカットと、エイリアス・赤タグの使い方10個（⌘R / オリジナルを表示 / ⌘I / 赤タグ / 赤タグの一覧 / ⌘L / ⌥⌘P / ⌘↑ / パス名をコピー / スペース）。
+タップすると「やり方」が手順で出る。データは `shortcuts.json`（`steps` に手順を1行ずつ）。追加するときは `items` に1件足して、`sw.js` の `CACHE` と `?v=` を上げる。
+
 ## スキルは87個に拡張
 
 初版の58個（user + Obsidian）に、anthropic-skills プラグインの Monica 専用スキル29個を追加。

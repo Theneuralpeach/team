@@ -5,7 +5,8 @@
   var TEAM = null;     // team.json
   var SKILLS = null;   // skills.json
   var FRAMES = null;   // frames.json
-  var view = "people"; // "people" | "skills" | "frames"
+  var SHORTCUTS = null; // shortcuts.json
+  var view = "people"; // "people" | "skills" | "frames" | "shortcuts"
   var filter = { people: "all", skills: "all" };
   var query = "";
 
@@ -15,9 +16,10 @@
   Promise.all([
     fetch("team.json?v=3").then(function (r) { return r.json(); }),
     fetch("skills.json?v=4").then(function (r) { return r.json(); }),
-    fetch("frames.json?v=3").then(function (r) { return r.json(); })
+    fetch("frames.json?v=3").then(function (r) { return r.json(); }),
+    fetch("shortcuts.json?v=1").then(function (r) { return r.json(); })
   ]).then(function (res) {
-    TEAM = res[0]; SKILLS = res[1]; FRAMES = res[2]; boot();
+    TEAM = res[0]; SKILLS = res[1]; FRAMES = res[2]; SHORTCUTS = res[3]; boot();
   }).catch(function () {
     $("roster").innerHTML =
       '<p class="empty">データを読み込めませんでした。通信を確認して開き直してください。</p>';
@@ -29,6 +31,7 @@
     $("tab-people").addEventListener("click", function () { setView("people"); });
     $("tab-skills").addEventListener("click", function () { setView("skills"); });
     $("tab-frames").addEventListener("click", function () { setView("frames"); });
+    $("tab-shortcuts").addEventListener("click", function () { setView("shortcuts"); });
 
     $("q").addEventListener("input", function (e) {
       query = e.target.value.trim().toLowerCase();
@@ -59,12 +62,14 @@
     $("tab-people").setAttribute("aria-selected", v === "people" ? "true" : "false");
     $("tab-skills").setAttribute("aria-selected", v === "skills" ? "true" : "false");
     $("tab-frames").setAttribute("aria-selected", v === "frames" ? "true" : "false");
+    $("tab-shortcuts").setAttribute("aria-selected", v === "shortcuts" ? "true" : "false");
     $("triage-open").hidden = v !== "people";
-    $("chips").hidden = v === "frames";
+    $("chips").hidden = v === "frames" || v === "shortcuts";
     $("q").placeholder = v === "people" ? "名前・役割・やりたいこと"
       : v === "skills" ? "スキル名・やりたいこと"
+      : v === "shortcuts" ? "キー・やりたいこと"
       : "フレーム名・やりたいこと";
-    if (v !== "frames") buildChips();
+    if (v === "people" || v === "skills") buildChips();
     render();
     window.scrollTo({ top: 0 });
   }
@@ -115,6 +120,7 @@
   function render() {
     if (view === "people") return renderPeople();
     if (view === "skills") return renderSkills();
+    if (view === "shortcuts") return renderShortcuts();
     return renderFrames();
   }
 
@@ -206,6 +212,32 @@
     $("meta").textContent = FRAMES.frames.length + "個の思考フレーム · 更新 " + FRAMES.updated;
   }
 
+  function renderShortcuts() {
+    var list = SHORTCUTS.items.filter(function (s) {
+      if (!query) return true;
+      var hay = [s.name, s.sub, s.what, s.steps.join(" ")].join(" ").toLowerCase();
+      return hay.indexOf(query) !== -1;
+    });
+
+    var roster = $("roster");
+    roster.innerHTML = "";
+    list.forEach(function (s) {
+      var b = card(false);
+      var row = el("div", "row");
+      row.appendChild(el("span", "nm", s.name));
+      row.appendChild(el("span", "go", "›"));
+      b.appendChild(row);
+      b.appendChild(el("div", "ttl", s.sub));
+      b.appendChild(el("p", "sm", s.what));
+      b.addEventListener("click", function () { openShortcut(s); });
+      roster.appendChild(b);
+    });
+
+    $("empty").hidden = list.length !== 0;
+    $("count").textContent = list.length + " / " + SHORTCUTS.items.length + " 個";
+    $("meta").textContent = SHORTCUTS.items.length + "個の Mac のショートカット · 更新 " + SHORTCUTS.updated;
+  }
+
   function locShort(loc) {
     return loc === "user" ? "個人" : loc === "obsidian" ? "Obsidian" : "プラグイン";
   }
@@ -290,6 +322,23 @@
     }
 
     setCopy(f.template, "プロンプトをコピー");
+    show($("sheet"));
+  }
+
+  /* ---------- 詳細（Mac のショートカット） ---------- */
+  function openShortcut(s) {
+    $("sheet-name").textContent = s.name;
+    $("sheet-title").textContent = s.sub;
+    $("sheet-summary").textContent = s.what;
+
+    $("block-template").hidden = true;
+    $("block-tags").hidden = true;
+    $("block-use").hidden = false;
+    $("use-label").textContent = "やり方";
+    fillList($("sheet-use"), s.steps);
+
+    $("copy").hidden = true;
+    $("copied").textContent = "";
     show($("sheet"));
   }
 
