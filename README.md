@@ -1,13 +1,13 @@
 # AI チーム
 
-Monica の AI チーム 19人を携帯から引くための PWA。内訳はプラグイン12人＋個人スキル7人（Leo / Juno / Kai / Mia / Vera / Cal / Rui）。終了したクライアント（Eyelinq、Tanoshii Project）は「終了」バッジを付けて一番下に置いている。
+Monica の AI チーム 16人を携帯から引くための PWA。全員 `~/.claude/skills/` の個人スキル（2026-10-11 再編 v3）。統合した旧メンバー（Sora・Vera・Cal・Rui・Niko・Hope）の名前で探すと、引き継いだ人が出る。終了したクライアント（Eyelinq、Tanoshii Project）は「終了」バッジを付けて一番下に置いている。
 
 https://theneuralpeach.github.io/team/
 
 ## できること
 
-- グループで絞り込み（全員 / 経営・運営 / 制作 / 品質・心理 / クライアント）
-- 名前・役割・やりたいことで検索（「英語」で Cal、「請求書」で Sunny）
+- グループで絞り込み（全員 / 経営・売る / 伸ばす / 作る・通す / お金・体 / クライアント）
+- 名前・役割・やりたいことで検索（「英語」で Echo、「請求書」で Sunny、「Vera」でも Echo）
 - カードをタップして詳細 →「○○を召喚して」をワンタップでコピー
 - 「誰に頼む？」で 2 問答えると担当者が出る
 
@@ -17,7 +17,7 @@ https://theneuralpeach.github.io/team/
 
 `team.json` が唯一のデータ。役割の文章はアプリ用に短く書き直してあるので自動生成はしない。
 
-正本は monica-ai-team プラグインの `skills/*/SKILL.md`。
+正本は `~/.claude/skills/<id>/SKILL.md`（2026-10-11 から）。プラグイン monica-ai-team の古いコピー（v0.1.0）に残っている統合済みの人は照合で数えない。
 人が増減した時のズレは照合スクリプトで検出する。
 
 ```
@@ -27,7 +27,7 @@ https://theneuralpeach.github.io/team/
 社員が一致していれば `一致 ✓` が出る。個人スキル（`status: user`）はプラグインの照合から外し、
 `~/.claude/skills/<id>/SKILL.md` があるかだけ見る。
 
-`status` の種類: `staff`（プラグイン社員）/ `contract`（仮採用の外注。今は0人）/ `user`（`~/.claude/skills/` にある人格。Leo・Juno・Kai・Mia・Vera・Cal・Rui）/ `ended`（終了したクライアント。灰色表示・振り分けから除外）。
+`status` の種類: `staff`（プラグイン社員。今は0人）/ `contract`（仮採用の外注。今は0人）/ `user`（`~/.claude/skills/` にある人格。16人全員）/ `ended`（終了したクライアント。灰色表示・振り分けから除外）。
 
 ## 更新の手順
 
@@ -42,7 +42,7 @@ https://theneuralpeach.github.io/team/
 index.html      画面
 styles.css      見た目
 app.js          一覧・検索・絞り込み・コピー・振り分け
-team.json       データ（19人＋振り分けの分岐）
+team.json       データ（16人＋終了2件＋振り分けの分岐）
 sw.js           オフライン用（ネット優先・落ちたらキャッシュ）
 manifest.json   ホーム画面インストール用
 tools/          正本との照合スクリプト

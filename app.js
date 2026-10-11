@@ -14,8 +14,8 @@
 
   /* ---------- 起動 ---------- */
   Promise.all([
-    fetch("team.json?v=3").then(function (r) { return r.json(); }),
-    fetch("skills.json?v=4").then(function (r) { return r.json(); }),
+    fetch("team.json?v=4").then(function (r) { return r.json(); }),
+    fetch("skills.json?v=5").then(function (r) { return r.json(); }),
     fetch("frames.json?v=3").then(function (r) { return r.json(); }),
     fetch("shortcuts.json?v=2").then(function (r) { return r.json(); })
   ]).then(function (res) {

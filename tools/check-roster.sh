@@ -29,7 +29,9 @@ user_ids=$(python3 -c '
 import json
 d = json.load(open("team.json"))
 print("\n".join(sorted(p["id"] for p in d["people"] if p["status"] == "user")))')
-skills=$(comm -23 <(ls "$PLUGIN/skills" | sort) <(printf '%s\n' "$user_ids"))
+# 2026-10-11 再編 v3 で統合・改名した人。古いプラグイン（v0.1.0）に残っていても数えない
+retired=$(printf '%s\n' sora niko hope-chie honda-ya kappo-honda | sort)
+skills=$(comm -23 <(ls "$PLUGIN/skills" | sort) <(printf '%s\n' "$user_ids" | sort) | comm -23 - <(printf '%s\n' "$retired"))
 app=$(python3 -c '
 import json
 d = json.load(open("team.json"))
