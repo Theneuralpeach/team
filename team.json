@@ -279,9 +279,9 @@
       ]
     },
     {
-      "id": "shintaro",
-      "name": "Shintaro",
-      "ja": "新太郎",
+      "id": "yuji",
+      "name": "Yuji",
+      "ja": "ユージ",
       "group": "client",
       "title": "HONDA-YA 担当（Tustin）",
       "status": "user",
@@ -291,7 +291,8 @@
       ],
       "tags": [
         "[HONDA-YA]",
-        "[新太郎]",
+        "[ユージ]",
+        "新太郎",
         "本多屋"
       ]
     },
@@ -553,7 +554,7 @@
         {
           "label": "HONDA-YA",
           "to": [
-            "shintaro"
+            "yuji"
           ]
         },
         {
