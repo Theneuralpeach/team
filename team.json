@@ -156,9 +156,9 @@
       ]
     },
     {
-      "id": "ingrid",
-      "name": "Ingrid",
-      "ja": "イングリッド",
+      "id": "henry",
+      "name": "Henry",
+      "ja": "ヘンリー",
       "group": "grow",
       "title": "心理学者",
       "status": "user",
@@ -169,7 +169,9 @@
         "どこで止めたら続きが見たくなる？"
       ],
       "tags": [
+        "[Henry]",
         "[Ingrid]",
+        "[ヘンリー]",
         "[イングリッド]",
         "心理"
       ]
@@ -476,7 +478,7 @@
         {
           "label": "なぜハマるか・本音",
           "to": [
-            "ingrid"
+            "henry"
           ]
         },
         {
