@@ -106,6 +106,14 @@
    "trigger": "動画作って / カルーセル作って"
   },
   {
+   "slug": "genie",
+   "name": "Genie",
+   "cat": "team",
+   "loc": "user",
+   "what": "AI 生成のプロ。モデル選び・プロンプト・参照画像・似せる・クレジットの見積もり。",
+   "trigger": "AIで作って / プロンプト書いて"
+  },
+  {
    "slug": "kai",
    "name": "Kai",
    "cat": "team",
