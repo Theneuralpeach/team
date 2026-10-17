@@ -14,7 +14,7 @@
 
   /* ---------- 起動 ---------- */
   Promise.all([
-    fetch("team.json?v=4").then(function (r) { return r.json(); }),
+    fetch("team.json?v=5").then(function (r) { return r.json(); }),
     fetch("skills.json?v=5").then(function (r) { return r.json(); }),
     fetch("frames.json?v=3").then(function (r) { return r.json(); }),
     fetch("shortcuts.json?v=2").then(function (r) { return r.json(); })
@@ -136,8 +136,24 @@
 
     var roster = $("roster");
     roster.innerHTML = "";
+    /* 一番上に Monica（全員表示で検索なしの時だけ。2026-10-16） */
+    if (TEAM.owner && f === "all" && !query) {
+      var o = TEAM.owner, ob = el("div", "owner");
+      ob.appendChild(photo(o.photo, o.name));
+      var ot = el("div", "owner-tx");
+      ot.appendChild(el("span", "nm", o.name));
+      if (o.ja) ot.appendChild(el("span", "ja", o.ja));
+      ot.appendChild(el("span", "ttl", o.title));
+      ob.appendChild(ot);
+      roster.appendChild(ob);
+    }
     list.forEach(function (p) {
       var b = card(p.status === "contract", p.status === "ended");
+      b.classList.add("has-ph");
+      b.appendChild(photo(p.photo, p.name));
+      var tx = el("div", "tx");
+      b.appendChild(tx);
+      b = tx;
       var row = el("div", "row");
       row.appendChild(el("span", "nm", p.name));
       if (p.ja) row.appendChild(el("span", "ja", p.ja));
@@ -146,6 +162,7 @@
       b.appendChild(row);
       b.appendChild(el("div", "ttl", p.title));
       b.appendChild(el("p", "sm", p.summary));
+      b = b.parentNode;
       b.addEventListener("click", function () { openPerson(p); });
       roster.appendChild(b);
     });
@@ -251,6 +268,19 @@
     b.className = "person" + (isContract ? " contract" : "") + (isEnded ? " ended" : "");
     return b;
   }
+  /* プロフィール写真（無い人は頭文字の丸） */
+  function photo(src, name) {
+    var w = el("span", "ph");
+    if (src) {
+      var i = document.createElement("img");
+      i.src = src + "?v=1"; i.alt = ""; i.loading = "lazy"; i.decoding = "async";
+      w.appendChild(i);
+    } else {
+      w.classList.add("ini");
+      w.textContent = (name || "?").charAt(0);
+    }
+    return w;
+  }
   function el(tag, cls, text) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -264,6 +294,9 @@
     $("block-use").hidden = false;
     $("sheet-name").textContent = p.name + (p.ja ? "（" + p.ja + "）" : "");
     $("sheet-title").textContent = p.title + (p.status === "contract" ? " · 外注" : "") + (p.status === "ended" ? " · 終了" : "");
+    var sp = $("sheet-photo");
+    sp.innerHTML = "";
+    if (p.photo) { sp.appendChild(photo(p.photo, p.name)); sp.hidden = false; } else { sp.hidden = true; }
     $("sheet-summary").textContent = p.summary;
 
     $("use-label").textContent = "こんな時";
@@ -279,6 +312,7 @@
 
   /* ---------- 詳細（スキル） ---------- */
   function openSkill(s) {
+    $("sheet-photo").hidden = true;
     $("block-template").hidden = true;
     $("block-use").hidden = false;
     $("sheet-name").textContent = s.name;
@@ -304,6 +338,7 @@
 
   /* ---------- 詳細（フレーム） ---------- */
   function openFrame(f) {
+    $("sheet-photo").hidden = true;
     $("sheet-name").textContent = f.name;
     $("sheet-title").textContent = f.sub;
     $("sheet-summary").textContent = f.what;
@@ -327,6 +362,7 @@
 
   /* ---------- 詳細（Mac のショートカット） ---------- */
   function openShortcut(s) {
+    $("sheet-photo").hidden = true;
     $("sheet-name").textContent = s.name;
     $("sheet-title").textContent = s.sub;
     $("sheet-summary").textContent = s.what;

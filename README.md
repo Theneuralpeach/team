@@ -1,6 +1,6 @@
 # AI チーム
 
-Monica の AI チーム 16人を携帯から引くための PWA。全員 `~/.claude/skills/` の個人スキル（2026-10-11 再編 v3）。統合した旧メンバー（Sora・Vera・Cal・Rui・Niko・Hope）の名前で探すと、引き継いだ人が出る。終了したクライアント（Eyelinq、Tanoshii Project）は「終了」バッジを付けて一番下に置いている。
+Monica の AI チーム 17人を携帯から引くための PWA。全員 `~/.claude/skills/` の個人スキル（2026-10-11 再編 v3、2026-10-14 Genie 追加）。2026-10-16 から全員の顔写真（`avatars/`）を表示し、一番上に Monica のカードを置く。統合した旧メンバー（Sora・Vera・Cal・Rui・Niko・Hope）の名前で探すと、引き継いだ人が出る。終了したクライアント（Eyelinq、Tanoshii Project）は「終了」バッジを付けて一番下に置いている。
 
 https://theneuralpeach.github.io/team/
 
@@ -27,7 +27,7 @@ https://theneuralpeach.github.io/team/
 社員が一致していれば `一致 ✓` が出る。個人スキル（`status: user`）はプラグインの照合から外し、
 `~/.claude/skills/<id>/SKILL.md` があるかだけ見る。
 
-`status` の種類: `staff`（プラグイン社員。今は0人）/ `contract`（仮採用の外注。今は0人）/ `user`（`~/.claude/skills/` にある人格。16人全員）/ `ended`（終了したクライアント。灰色表示・振り分けから除外）。
+`status` の種類: `staff`（プラグイン社員。今は0人）/ `contract`（仮採用の外注。今は0人）/ `user`（`~/.claude/skills/` にある人格。17人全員）/ `ended`（終了したクライアント。灰色表示・振り分けから除外）。
 
 ## 更新の手順
 
@@ -42,7 +42,8 @@ https://theneuralpeach.github.io/team/
 index.html      画面
 styles.css      見た目
 app.js          一覧・検索・絞り込み・コピー・振り分け
-team.json       データ（16人＋終了2件＋振り分けの分岐）
+team.json       データ（17人＋終了2件＋振り分けの分岐。owner = Monica のカード）
+avatars/        プロフィール写真（360×480 の JPG。元は Desktop/Deliverables の名簿の写真）
 sw.js           オフライン用（ネット優先・落ちたらキャッシュ）
 manifest.json   ホーム画面インストール用
 tools/          正本との照合スクリプト

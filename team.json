@@ -1,7 +1,7 @@
 {
-  "version": "2.0.0",
-  "updated": "2026-10-11",
-  "source": "~/.claude/skills の個人スキル16人（2026-10-11 再編 v3）",
+  "version": "3.0.0",
+  "updated": "2026-10-16",
+  "source": "~/.claude/skills の個人スキル17人（2026-10-14 Genie 追加）＋ Monica。写真は 2026-10-15 の名簿と同じ",
   "groups": [
     {
       "id": "lead",
@@ -49,7 +49,8 @@
         "ニコ",
         "Hope",
         "知恵"
-      ]
+      ],
+      "photo": "avatars/leo.jpg"
     },
     {
       "id": "oracle",
@@ -70,7 +71,8 @@
         "[オラクル]",
         "戦略",
         "方向性"
-      ]
+      ],
+      "photo": "avatars/oracle.jpg"
     },
     {
       "id": "mia",
@@ -92,7 +94,8 @@
         "セールス",
         "Rui",
         "ルイ"
-      ]
+      ],
+      "photo": "avatars/mia.jpg"
     },
     {
       "id": "jake",
@@ -113,7 +116,8 @@
         "[Jake]",
         "[ジェイク]",
         "ストラテジスト"
-      ]
+      ],
+      "photo": "avatars/jake.jpg"
     },
     {
       "id": "vega",
@@ -122,7 +126,7 @@
       "group": "grow",
       "title": "マーケティング",
       "status": "user",
-      "summary": "40代。誰に・どこで・どの順番で届けるか。自然な投稿と広告、アフィリエイト・PR、週ごとの立ち上げ計画と判断の数字。落ち着いて数字で話す。",
+      "summary": "40代のフィリピン系。自分のブランドを何本も立ち上げてきた。誰に・どこで・どの順番で届けるか。自然な投稿と広告、アフィリエイト・PR、週ごとの立ち上げ計画と判断の数字。落ち着いて数字で話す。",
       "use": [
         "マーケ全体どうする？",
         "どこで売る？",
@@ -135,7 +139,8 @@
         "[ヴェガ]",
         "[マーゴ]",
         "マーケ"
-      ]
+      ],
+      "photo": "avatars/vega.jpg"
     },
     {
       "id": "nova",
@@ -155,7 +160,8 @@
         "[Nova]",
         "[ノヴァ]",
         "リサーチ"
-      ]
+      ],
+      "photo": "avatars/nova.jpg"
     },
     {
       "id": "henry",
@@ -164,7 +170,7 @@
       "group": "grow",
       "title": "心理学者",
       "status": "user",
-      "summary": "50代の心理学者。なぜハマるか、本音と建前、引きで止める位置。作らない。",
+      "summary": "心理学オタクの40代後半。なぜハマるか、本音と建前、引きで止める位置。作らない。",
       "use": [
         "なぜハマる？",
         "この人たちの本音は？",
@@ -176,7 +182,8 @@
         "[ヘンリー]",
         "[イングリッド]",
         "心理"
-      ]
+      ],
+      "photo": "avatars/henry.jpg"
     },
     {
       "id": "juno",
@@ -198,7 +205,8 @@
         "Sora",
         "空",
         "デザイン"
-      ]
+      ],
+      "photo": "avatars/juno.jpg"
     },
     {
       "id": "genie",
@@ -219,7 +227,8 @@
         "[ジーニー]",
         "AI生成",
         "プロンプト"
-      ]
+      ],
+      "photo": "avatars/genie.jpg"
     },
     {
       "id": "kai",
@@ -238,7 +247,8 @@
         "[Kai]",
         "[カイ]",
         "Web"
-      ]
+      ],
+      "photo": "avatars/kai.jpg"
     },
     {
       "id": "echo",
@@ -263,7 +273,8 @@
         "Vera",
         "ヴェラ",
         "英語"
-      ]
+      ],
+      "photo": "avatars/echo.jpg"
     },
     {
       "id": "sunny",
@@ -282,7 +293,8 @@
         "[Sunny]",
         "[サニー]",
         "経理"
-      ]
+      ],
+      "photo": "avatars/sunny.jpg"
     },
     {
       "id": "harmony",
@@ -301,7 +313,8 @@
         "[Harmony]",
         "[ハーモニー]",
         "体調"
-      ]
+      ],
+      "photo": "avatars/harmony.jpg"
     },
     {
       "id": "yuji",
@@ -319,7 +332,8 @@
         "[ユージ]",
         "新太郎",
         "本多屋"
-      ]
+      ],
+      "photo": "avatars/yuji.jpg"
     },
     {
       "id": "wataru",
@@ -337,7 +351,8 @@
         "[Wataru]",
         "[ワタル]",
         "割烹"
-      ]
+      ],
+      "photo": "avatars/wataru.jpg"
     },
     {
       "id": "taiga",
@@ -353,7 +368,8 @@
       "tags": [
         "[Taiga]",
         "[タイガ]"
-      ]
+      ],
+      "photo": "avatars/taiga.jpg"
     },
     {
       "id": "yuki",
@@ -369,7 +385,8 @@
       "tags": [
         "[Yuki]",
         "[ユキ]"
-      ]
+      ],
+      "photo": "avatars/yuki.jpg"
     },
     {
       "id": "tanoshii",
@@ -608,5 +625,11 @@
         }
       ]
     }
-  ]
+  ],
+  "owner": {
+    "name": "Monica",
+    "ja": "モニカ",
+    "title": "CEO・最終決定",
+    "photo": "avatars/monica.jpg"
+  }
 }
