@@ -1,6 +1,6 @@
 {
- "version": "1.1.0",
- "updated": "2026-10-05",
+ "version": "1.2.0",
+ "updated": "2026-10-11",
  "note": "user=Claude Codeで常に / obsidian=Obsidian作業で / plugin=anthropic-skillsプラグインで使える",
  "cats": [
   {
@@ -42,28 +42,76 @@
  ],
  "skills": [
   {
-   "slug": "vera",
-   "name": "Vera",
+   "slug": "leo",
+   "name": "Leo",
    "cat": "team",
    "loc": "user",
-   "what": "アートディレクター判定。作らず落とす。複数案から1つ選び、却下基準を言葉にする。",
-   "trigger": "Veraを召喚して / どの案がいいか決められない"
+   "what": "分身・相談役・CEO。今日やること、やりかけ、記録、相談、振り分け（Niko と Hope の仕事も）。",
+   "trigger": "今どうなってる / 今日何やる / 前にも言ってた？"
   },
   {
-   "slug": "cal",
-   "name": "Cal",
+   "slug": "oracle",
+   "name": "Oracle",
    "cat": "team",
    "loc": "user",
-   "what": "英語コンバージョンコピー。日本語の英訳でなくゼロから英語で書く。ヒーロー一行・CTA。",
-   "trigger": "Calを召喚して / 英語のコピー書いて"
+   "what": "経営参謀。何か月も先、続ける・卒業、収入の柱。5手先まで読む。",
+   "trigger": "この先どうする / 続けていい？"
   },
   {
    "slug": "mia",
    "name": "Mia",
    "cat": "team",
    "loc": "user",
-   "what": "購買心理／CRO。人が申し込む・買うまで動く理由を設計。CTA文言・締切・離脱診断。",
-   "trigger": "Miaを召喚して / 申込率上げたい"
+   "what": "セールス。値段・見積もり・提案・契約書・申込が増えるCTA（Rui の仕事も）。",
+   "trigger": "いくらにする / 契約書見て / 申込が少ない"
+  },
+  {
+   "slug": "jake",
+   "name": "Jake",
+   "cat": "team",
+   "loc": "user",
+   "what": "コンテンツ戦略。何を投稿するか、フックとカバー、どれが伸びるか、数字の読み。",
+   "trigger": "何投稿する / 伸びる？ / なんで伸びない"
+  },
+  {
+   "slug": "vega",
+   "name": "Vega",
+   "cat": "team",
+   "loc": "user",
+   "what": "マーケティング。誰に・どこで・どの順番で、広告・アフィリエイト・立ち上げ計画。",
+   "trigger": "どこで売る / 広告いつから"
+  },
+  {
+   "slug": "nova",
+   "name": "Nova",
+   "cat": "team",
+   "loc": "user",
+   "what": "リサーチ。トレンド・相場・競合・事例・裏取りを出典つきで。",
+   "trigger": "調べて / トレンド / 相場"
+  },
+  {
+   "slug": "henry",
+   "name": "Henry",
+   "cat": "team",
+   "loc": "user",
+   "what": "心理学者。なぜハマるか、本音と建前、引きで止める位置。",
+   "trigger": "なぜハマる / 本音は"
+  },
+  {
+   "slug": "juno",
+   "name": "Juno",
+   "cat": "team",
+   "loc": "user",
+   "what": "動画と画像。Reel・カルーセル・カバー・ポスター・ロゴ（Sora の仕事も）。",
+   "trigger": "動画作って / カルーセル作って"
+  },
+  {
+   "slug": "genie",
+   "name": "Genie",
+   "cat": "team",
+   "loc": "user",
+   "what": "AI 生成のプロ。モデル選び・プロンプト・参照画像・似せる・クレジットの見積もり。",
+   "trigger": "AIで作って / プロンプト書いて"
   },
   {
    "slug": "kai",
@@ -74,19 +122,67 @@
    "trigger": "Kaiを召喚して / ランディング作って"
   },
   {
-   "slug": "rui",
-   "name": "Rui",
+   "slug": "echo",
+   "name": "Echo",
    "cat": "team",
    "loc": "user",
-   "what": "セールス／アカウント。作らない。値段を決める・パッケージ定義・要件を閉じる。",
-   "trigger": "Ruiを召喚して / いくらで売る"
+   "what": "編集長。メール・返信・キャプション・英語のコピーを書き、送る前に全部通す（Cal と Vera の仕事も）。",
+   "trigger": "メール書いて / 送る前に見て / どれがいい？"
+  },
+  {
+   "slug": "sunny",
+   "name": "Sunny",
+   "cat": "team",
+   "loc": "user",
+   "what": "経理。レシート・経費・請求書・入金・サブスク。",
+   "trigger": "これ記録 / 請求書作って"
+  },
+  {
+   "slug": "harmony",
+   "name": "Harmony",
+   "cat": "team",
+   "loc": "user",
+   "what": "ウェルネス。体調・睡眠・アレルギー・周期・薬・ストレス。",
+   "trigger": "体調が悪い / 眠れない"
+  },
+  {
+   "slug": "yuji",
+   "name": "ユージ",
+   "cat": "team",
+   "loc": "user",
+   "what": "HONDA-YA 担当。店の中身と禁止事項。",
+   "trigger": "HONDA-YA の投稿"
+  },
+  {
+   "slug": "wataru",
+   "name": "Wataru",
+   "cat": "team",
+   "loc": "user",
+   "what": "Kappo Honda 担当。落ち着きと品質。",
+   "trigger": "Kappo の投稿"
+  },
+  {
+   "slug": "taiga",
+   "name": "Taiga",
+   "cat": "team",
+   "loc": "user",
+   "what": "クライアント担当（米国向け物販の Instagram）。",
+   "trigger": "Taiga の担当先の投稿"
+  },
+  {
+   "slug": "yuki",
+   "name": "Yuki",
+   "cat": "team",
+   "loc": "user",
+   "what": "クライアント担当（日本酒の動画）。",
+   "trigger": "Yuki の担当先の動画"
   },
   {
    "slug": "monica-design-taste",
    "name": "デザインの床",
    "cat": "design",
    "loc": "user",
-   "what": "全ビジュアル仕事の共通ルール。anti-slop・AIっぽさ禁止・高見えの基準。SoraもKaiも先に読む。",
+   "what": "全ビジュアル仕事の共通ルール。anti-slop・AIっぽさ禁止・高見えの基準。JunoもKaiも先に読む。",
    "trigger": "自動で発火（デザイン作業時） / デザインの床"
   },
   {
@@ -504,14 +600,6 @@
    "loc": "user",
    "what": "やりたいことに合うスキルを見つけて導入を助ける。",
    "trigger": "○○できるスキルある？"
-  },
-  {
-   "slug": "echo",
-   "name": "Echo",
-   "cat": "qa",
-   "loc": "plugin",
-   "what": "QA担当。送信前の最終チェック。ブランド・トーン・CTA・AIっぽさを捕まえる。",
-   "trigger": "送る前にチェックして / Echo"
   },
   {
    "slug": "iterative-refinement",
