@@ -325,3 +325,46 @@ main { padding: 14px 14px 40px; }
   border-radius: 10px; border: 1px solid var(--rule);
   background: transparent; color: var(--soft); cursor: pointer;
 }
+
+/* ---------- プロフィール写真（2026-10-16 Monica「みんなの顔がプロフィール写真のように」） ---------- */
+.ph {
+  display: inline-block; flex: none; width: 64px; height: 64px; border-radius: 50%; overflow: hidden;
+  background: var(--ai-wash); box-shadow: 0 0 0 2px var(--card), 0 0 0 3px var(--rule);
+}
+.ph img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+.ph.ini {
+  display: grid; place-items: center;
+  font-family: var(--serif); font-size: 24px; color: var(--soft);
+}
+.person.has-ph { flex-direction: row; align-items: center; gap: 14px; }
+.person .tx { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+.person .sm {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+.owner {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--ink); color: var(--paper);
+  border-radius: 12px; padding: 16px 18px;
+}
+.owner .ph { width: 88px; height: 88px; box-shadow: 0 0 0 3px var(--paper); }
+.owner-tx { display: flex; flex-direction: column; gap: 2px; }
+.owner .nm { font-family: var(--serif); font-size: 26px; }
+.owner .ja { font-size: 13px; opacity: .7; }
+.owner .ttl { font-size: 14px; font-weight: 700; margin-top: 4px; }
+@media (min-width: 640px) { .owner { grid-column: 1 / -1; } }
+
+.sheet-photo { margin: 0 0 14px; }
+.sheet-photo .ph { width: 120px; height: 120px; }
+
+/* 2026-10-16 スマホ幅でタブの文字が縦に崩れていたのを直す（Monica 指示） */
+.tab { white-space: nowrap; }
+.tabs { flex: 0 1 auto; min-width: 0; }
+@media (max-width: 430px) {
+  .bar-top { gap: 8px; }
+  .tab { padding: 6px 10px; font-size: 15px; }
+  .ask { padding: 7px 10px; }
+}
+@media (max-width: 350px) {
+  .tab { padding: 6px 7px; font-size: 14px; }
+}
